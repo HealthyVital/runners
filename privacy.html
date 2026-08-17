@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Privacy Policy – RUN SMART</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--p:#15803d;--pm:#16a34a;--ph:#166534;--pl:#dcfce7;--pll:#f0fdf4;--txt:#111827;--tg:#6b7280;--ts:#374151;--bd:#e5e7eb;--f:'Open Sans',sans-serif;--nh:64px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--f);color:var(--txt);background:#fff}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.97);border-bottom:1px solid var(--pl);display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:var(--nh)}
+    .nav-logo{font-weight:900;font-size:16px;color:var(--p);letter-spacing:.06em;text-decoration:none}
+    .nav-left{display:flex;align-items:center;gap:20px}
+    .nav-back{display:flex;align-items:center;gap:6px;color:var(--p);font-weight:600;text-decoration:none;font-size:14px}
+    .nav-back:hover{opacity:.75}
+    .nav-back svg{transition:transform .15s}
+    .nav-back:hover svg{transform:translateX(-3px)}
+    .nav-right{display:flex;align-items:center;gap:20px}
+    .nav-link{color:#4b5563;font-weight:500;text-decoration:none;font-size:15px}
+    .nav-link:hover{color:var(--p)}
+    .btn-nav{background:var(--p);color:#fff;padding:9px 22px;border-radius:9999px;font-weight:600;border:none;cursor:pointer;font-size:14px;font-family:var(--f)}
+    .btn-nav:hover{background:var(--ph)}
+    .ham-wrap{position:relative}
+    .nav-ham{background:none;border:none;cursor:pointer;padding:6px;display:flex}
+    .ham-drop{display:none;position:absolute;top:calc(100% + 12px);right:0;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.14);min-width:220px;padding:8px 0;z-index:300}
+    .ham-drop.open{display:block}
+    .ham-item{display:flex;align-items:center;gap:12px;padding:11px 20px;color:var(--txt);text-decoration:none;font-size:15px;cursor:pointer;transition:background .15s;border:none;background:none;width:100%;font-family:var(--f);text-align:left}
+    .ham-item:hover{background:var(--pll)}
+    .ham-div{height:1px;background:var(--bd);margin:6px 0}
+    /* CONTENT */
+    .page-wrap{max-width:760px;margin:0 auto;padding:calc(var(--nh) + 52px) 32px 80px}
+    .page-eyebrow{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pm);margin-bottom:10px}
+    .page-title{font-size:36px;font-weight:900;color:var(--p);margin-bottom:8px;line-height:1.15}
+    .page-date{font-size:13px;color:var(--tg);margin-bottom:36px}
+    .intro{font-size:15px;color:var(--ts);line-height:1.8;background:var(--pll);border-left:4px solid var(--pm);padding:18px 22px;border-radius:0 10px 10px 0;margin-bottom:40px}
+    .pp-section{margin-bottom:36px}
+    .pp-num{display:inline-block;background:var(--p);color:#fff;font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px;letter-spacing:.04em;margin-bottom:10px}
+    .pp-title{font-size:20px;font-weight:800;color:var(--p);margin-bottom:12px}
+    .pp-sub{font-size:16px;font-weight:700;color:var(--ts);margin:16px 0 8px}
+    .pp-body{font-size:15px;color:var(--ts);line-height:1.85}
+    .pp-body p{margin-bottom:12px}
+    .pp-body p:last-child{margin-bottom:0}
+    .pp-body ul{padding-left:20px;margin:8px 0 12px}
+    .pp-body ul li{margin-bottom:7px;line-height:1.7}
+    .pp-body a{color:var(--pm);text-decoration:none}
+    .pp-body a:hover{text-decoration:underline}
+    .def-grid{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--bd);border-radius:10px;overflow:hidden;margin:12px 0}
+    .def-row{display:grid;grid-template-columns:160px 1fr;border-bottom:1px solid var(--bd)}
+    .def-row:last-child{border-bottom:none}
+    .def-term{background:var(--pll);font-weight:700;font-size:13px;color:var(--p);padding:11px 14px;line-height:1.4}
+    .def-desc{font-size:13px;color:var(--ts);padding:11px 14px;line-height:1.6}
+    .notice-box{background:var(--pll);border:1px solid var(--pl);border-radius:10px;padding:16px 20px;margin:14px 0;font-size:14px;color:var(--ts);line-height:1.7}
+    .notice-box b{color:var(--p)}
+    .divider{height:1px;background:var(--bd);margin:36px 0}
+    .signature{margin-top:40px;padding-top:32px;border-top:2px solid var(--pl)}
+    .sig-name{font-size:20px;font-weight:900;color:var(--p);margin-bottom:4px}
+    .sig-title{font-size:14px;color:var(--tg)}
+    .sig-contact{margin-top:12px;font-size:14px;color:var(--ts)}
+    .sig-contact a{color:var(--pm);text-decoration:none}
+    @media(max-width:640px){.page-wrap{padding-left:16px;padding-right:16px}.nav-link{display:none}.def-row{grid-template-columns:1fr}.def-term{border-bottom:1px solid var(--bd)}}
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-back">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Home
+    </a>
+    <a href="index.html" class="nav-logo">RUN SMART</a>
+  </div>
+  <div class="nav-right">
+    <a href="practice.html" class="nav-link">Train</a>
+    <a href="courses.html" class="nav-link">Courses</a>
+    <button class="btn-nav" onclick="window.location.href='index.html'">Join Free</button>
+    <div class="ham-wrap">
+      <button class="nav-ham" onclick="toggleHam(event)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="ham-drop" id="ham-drop">
+        <a href="badges.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M12 13v9M9 19l3-3 3 3"/></svg>Milestones</a>
+        <a href="race-day.html" class="ham-item" style="color:#f97316"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l4-8 4 4 4-6 4 10"/><path d="M3 20h18"/></svg>Race Day Secrets <span style="background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:auto">Premium</span></a>
+        <a href="mailto:info@runsmart.co" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>Support</a>
+        <a href="privacy.html" class="ham-item" style="color:var(--p);font-weight:600"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Privacy Policy</a>
+        <a href="terms.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>Terms of Service</a>
+        <a href="#" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>About</a>
+        <div class="ham-div"></div>
+        <button class="ham-item" onclick="window.location.href='index.html'"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10,17 15,12 10,7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Log In</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-wrap">
+
+  <div class="page-eyebrow">Legal</div>
+  <h1 class="page-title">Privacy Policy</h1>
+  <div class="page-date">Last updated: August 2026 &nbsp;·&nbsp; Run Smart</div>
+
+  <div class="intro">
+    This Privacy Policy describes how Run Smart collects, uses, and discloses your information when you use our platform, and explains your privacy rights. By using Run Smart you agree to the collection and use of information in accordance with this policy.
+  </div>
+
+  <!-- INTERPRETATION & DEFINITIONS -->
+  <div class="pp-section">
+    <div class="pp-num">§</div>
+    <div class="pp-title">Interpretation &amp; Definitions</div>
+    <div class="pp-body">
+      <p>Words with initial capital letters have the meanings defined below. These definitions apply whether terms appear in singular or plural form.</p>
+      <div class="def-grid">
+        <div class="def-row"><div class="def-term">Account</div><div class="def-desc">A unique account created for you to access our Service or parts of it.</div></div>
+        <div class="def-row"><div class="def-term">Company</div><div class="def-desc">Refers to Run Smart, the online running training platform operated at runsmart.co. Also referred to as "We," "Us," or "Our."</div></div>
+        <div class="def-row"><div class="def-term">Cookies</div><div class="def-desc">Small files placed on your device by a website containing browsing details and preferences.</div></div>
+        <div class="def-row"><div class="def-term">Device</div><div class="def-desc">Any device that can access the Service such as a computer, mobile phone, or tablet.</div></div>
+        <div class="def-row"><div class="def-term">Personal Data</div><div class="def-desc">Any information that relates to an identified or identifiable individual.</div></div>
+        <div class="def-row"><div class="def-term">Service</div><div class="def-desc">Refers to the Run Smart website and platform, accessible at runsmart.co.</div></div>
+        <div class="def-row"><div class="def-term">Service Provider</div><div class="def-desc">Any third party that processes data on behalf of Run Smart to facilitate, deliver, or analyze our Service (e.g., Stripe for payment processing).</div></div>
+        <div class="def-row"><div class="def-term">Usage Data</div><div class="def-desc">Data collected automatically from your use of the Service, such as page visit duration, IP address, and browser type.</div></div>
+        <div class="def-row"><div class="def-term">You</div><div class="def-desc">The individual accessing or using the Service, or the entity on whose behalf access is made.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- COLLECTING DATA -->
+  <div class="pp-section">
+    <div class="pp-num">1</div>
+    <div class="pp-title">Data We Collect</div>
+    <div class="pp-body">
+      <div class="pp-sub">Personal Data</div>
+      <p>When you create an account or subscribe, we may collect:</p>
+      <ul>
+        <li>Email address</li>
+        <li>First and last name</li>
+        <li>Payment information (processed and stored securely by Stripe — Run Smart does not store full card numbers)</li>
+        <li>Subscription plan details and billing history</li>
+      </ul>
+
+      <div class="pp-sub">Usage Data</div>
+      <p>Usage data is collected automatically and may include your IP address, browser type and version, the pages you visit on our platform, time and date of visits, time spent on pages, and other diagnostic data.</p>
+
+      <div class="pp-sub">Content Interaction Data</div>
+      <p>We may record which workouts, plans, or courses you access, and your training activity (such as training days logged) to provide features like the Milestones progress system.</p>
+
+      <div class="pp-sub">Cookies &amp; Tracking Technologies</div>
+      <p>We use cookies and similar technologies to maintain your session and remember your preferences. Types include:</p>
+      <ul>
+        <li><strong>Necessary Cookies:</strong> Essential to provide core platform functionality.</li>
+        <li><strong>Acceptance Cookies:</strong> Record whether you have consented to cookie use.</li>
+        <li><strong>Functionality Cookies:</strong> Store preferences such as your login state and selected plan.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- USE OF DATA -->
+  <div class="pp-section">
+    <div class="pp-num">2</div>
+    <div class="pp-title">How We Use Your Data</div>
+    <div class="pp-body">
+      <p>We use your personal data for the following purposes:</p>
+      <ul>
+        <li>To provide, operate, and maintain the Run Smart platform and your membership.</li>
+        <li>To manage your account and process payments via Stripe.</li>
+        <li>To contact you regarding subscription renewals, platform updates, new content, or security notices.</li>
+        <li>To personalize your experience, including tracking training progress for the Milestones system.</li>
+        <li>To analyze usage patterns and improve the platform.</li>
+        <li>To enforce our Terms of Service and protect the rights and safety of our users.</li>
+      </ul>
+      <div class="notice-box">
+        <b>Content Watermarking:</b> For the protection of our intellectual property — and particularly for the Race Day Secrets section — videos served to logged-in members are watermarked with account identity data (email address). This data is embedded visually in the video stream to deter and trace unauthorized sharing. By accessing premium video content, you consent to this use of your email address.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SHARING DATA -->
+  <div class="pp-section">
+    <div class="pp-num">3</div>
+    <div class="pp-title">Sharing Your Data</div>
+    <div class="pp-body">
+      <p>We do not sell your personal data. We may share your information in the following limited circumstances:</p>
+      <ul>
+        <li><strong>Service Providers:</strong> With third-party services that help us operate the platform, including Stripe (payment processing). These providers are bound by confidentiality obligations and may only use your data to deliver their services.</li>
+        <li><strong>Legal Requirements:</strong> If required by law, court order, or governmental authority.</li>
+        <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets, your data may be transferred as part of that transaction.</li>
+        <li><strong>With Your Consent:</strong> For any other purpose with your explicit consent.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PREMIUM CONTENT & PRIVACY -->
+  <div class="pp-section">
+    <div class="pp-num">4</div>
+    <div class="pp-title">Premium Content — Race Day Secrets Section</div>
+    <div class="pp-body">
+      <div class="notice-box">
+        <b>Premium Content:</b> The Race Day Secrets section contains exclusive coaching content. Access is restricted to Annual Members only. By accessing this section, you confirm your membership status.
+      </div>
+      <div class="notice-box" style="margin-top:10px">
+        <b>Annual Membership Only — No Free Trial:</b> The Race Day Secrets section is accessible exclusively to Annual Members ($180/year). No free trial, monthly subscription, or promotional access is granted for this section.
+      </div>
+      <div class="notice-box" style="margin-top:10px">
+        <b>Professional Production Standards:</b> All Race Day Secrets content is produced by certified running coaches and sports scientists. This content is intended exclusively for adult wellness, race preparation, and performance education.
+      </div>
+      <p>Access to the Race Day Secrets section is logged as part of your account activity. This information:</p>
+      <ul>
+        <li>Is used solely for content access verification, security, and enforcement of our Terms of Service.</li>
+        <li>Is never shared with third parties except as required by law.</li>
+        <li>May be referenced if unauthorized distribution of content from this section is investigated.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- RETENTION -->
+  <div class="pp-section">
+    <div class="pp-num">5</div>
+    <div class="pp-title">Retention &amp; Transfer of Data</div>
+    <div class="pp-body">
+      <p>We retain your personal data only for as long as necessary to fulfill the purposes described in this policy, provide your membership, and comply with legal obligations. When your account is closed, we will delete or anonymize your personal data within a reasonable period, except where we are required to retain it by law.</p>
+      <p>Your information may be transferred to and processed on servers located outside your jurisdiction. Where this occurs, we take appropriate steps to ensure your data is handled securely and in accordance with this policy and applicable data protection laws.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- YOUR RIGHTS -->
+  <div class="pp-section">
+    <div class="pp-num">6</div>
+    <div class="pp-title">Your Rights</div>
+    <div class="pp-body">
+      <p>Depending on your location, you may have rights including:</p>
+      <ul>
+        <li><strong>Access:</strong> Request a copy of the personal data we hold about you.</li>
+        <li><strong>Correction:</strong> Request correction of inaccurate or incomplete data.</li>
+        <li><strong>Deletion:</strong> Request deletion of your personal data, subject to legal retention requirements.</li>
+        <li><strong>Objection:</strong> Object to certain types of processing, including marketing.</li>
+        <li><strong>Portability:</strong> Request a portable copy of your data in a machine-readable format.</li>
+      </ul>
+      <p>To exercise any of these rights, contact us at <a href="mailto:info@runsmart.co">info@runsmart.co</a>. We will respond within 30 days.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CHILDREN'S PRIVACY -->
+  <div class="pp-section">
+    <div class="pp-num">7</div>
+    <div class="pp-title">Children's Privacy</div>
+    <div class="pp-body">
+      <p>The Run Smart platform is not directed at children under the age of 13. We do not knowingly collect personal data from children under 13. If you believe your child has provided us with personal data, please contact us immediately at <a href="mailto:info@runsmart.co">info@runsmart.co</a> and we will take steps to delete that information.</p>
+      <p>The Race Day Secrets section requires users to be 18 years of age or older. If we discover that a user under 18 has accessed this section, their access will be revoked immediately and their data related to that section will be deleted.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECURITY -->
+  <div class="pp-section">
+    <div class="pp-num">8</div>
+    <div class="pp-title">Security</div>
+    <div class="pp-body">
+      <p>We take the security of your data seriously. Payment information is processed exclusively through Stripe, a PCI-DSS compliant payment processor — Run Smart never stores full card details. We use reasonable administrative, technical, and physical measures to protect your personal data from unauthorized access, disclosure, or destruction.</p>
+      <p>However, no method of transmission over the internet or electronic storage is 100% secure. While we strive to protect your data, we cannot guarantee absolute security.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CHANGES -->
+  <div class="pp-section">
+    <div class="pp-num">9</div>
+    <div class="pp-title">Changes to This Policy</div>
+    <div class="pp-body">
+      <p>We may update this Privacy Policy from time to time. When we do, we will update the date at the top of this page. For material changes, we will notify active members by email where possible. We encourage you to review this page periodically. Continued use of the platform after any update constitutes acceptance of the revised policy.</p>
+    </div>
+  </div>
+
+  <!-- SIGNATURE / CONTACT -->
+  <div class="signature">
+    <div class="sig-name">Run Smart</div>
+    <div class="sig-title">Online Running Training Platform · runsmart.co</div>
+    <div class="sig-contact">
+      Privacy questions or data requests: <a href="mailto:info@runsmart.co">info@runsmart.co</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleHam(e){e.stopPropagation();document.getElementById('ham-drop').classList.toggle('open')}
+document.addEventListener('click',()=>document.getElementById('ham-drop').classList.remove('open'));
+</script>
+<footer style="background:#15803d;color:#fff;padding:28px 32px;text-align:center">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="font-size:14px;font-weight:700;margin-bottom:6px">Powered by Run Smart</div>
+    <div style="font-size:12px;opacity:.7;margin-bottom:14px">© 2026 RUN SMART · All rights reserved.</div>
+    <div style="display:flex;gap:28px;justify-content:center;font-size:14px">
+      <a href="mailto:info@runsmart.co" style="color:#86efac;text-decoration:none">Support</a>
+      <a href="terms.html" style="color:#86efac;text-decoration:none">Terms</a>
+      <a href="privacy.html" style="color:#86efac;text-decoration:none">Privacy</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

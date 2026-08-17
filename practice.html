@@ -1,0 +1,372 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Train – RUN SMART</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--p:#15803d;--pm:#16a34a;--ph:#166534;--pl:#dcfce7;--pll:#f0fdf4;--txt:#111827;--tg:#6b7280;--ts:#374151;--bd:#e5e7eb;--star:#f59e0b;--f:'Open Sans',sans-serif;--nh:64px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--f);color:var(--txt);background:#fff}
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.97);border-bottom:1px solid var(--pl);display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:var(--nh)}
+    .nav-logo{font-weight:900;font-size:16px;color:var(--p);letter-spacing:.06em;text-decoration:none}
+    .nav-right{display:flex;align-items:center;gap:24px}
+    .nav-link{color:#4b5563;font-weight:500;text-decoration:none;font-size:15px;transition:color .2s}
+    .nav-link:hover,.nav-link.active{color:var(--p);font-weight:700}
+    .btn-nav{background:var(--p);color:#fff;padding:9px 22px;border-radius:9999px;font-weight:600;border:none;cursor:pointer;font-size:14px;font-family:var(--f)}
+    .btn-nav:hover{background:var(--ph)}
+    .ham-wrap{position:relative}
+    .nav-ham{background:none;border:none;cursor:pointer;padding:6px;display:flex;align-items:center}
+    .ham-drop{display:none;position:absolute;top:calc(100% + 12px);right:0;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.14);min-width:220px;padding:8px 0;z-index:300}
+    .ham-drop.open{display:block}
+    .ham-item{display:flex;align-items:center;gap:12px;padding:11px 20px;color:var(--txt);text-decoration:none;font-size:15px;cursor:pointer;transition:background .15s;border:none;background:none;width:100%;font-family:var(--f);text-align:left}
+    .ham-item:hover{background:var(--pll)}
+    .ham-item svg{flex-shrink:0;color:var(--tg)}
+    .ham-div{height:1px;background:var(--bd);margin:6px 0}
+    /* MAIN */
+    .main{padding:calc(var(--nh) + 32px) 32px 60px;max-width:1200px;margin:0 auto}
+    .page-title{font-size:32px;font-weight:800;color:var(--txt)}
+    .page-sub{font-size:15px;color:var(--tg);margin-top:6px}
+    /* SECTION */
+    .sec-head{display:flex;align-items:center;justify-content:space-between;margin-top:40px;margin-bottom:20px}
+    .sec-title{font-size:22px;font-weight:800;color:var(--txt)}
+    .btn-viewall{border:1px solid var(--bd);background:#fff;padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--f);color:var(--txt)}
+    .btn-viewall:hover{background:var(--pll);border-color:var(--pm)}
+    /* CARD GRID */
+    .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}
+    /* CLASS CARD */
+    .vcard{background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--bd);box-shadow:0 1px 6px rgba(0,0,0,.06);cursor:pointer;transition:box-shadow .2s,transform .15s}
+    .vcard:hover{box-shadow:0 6px 20px rgba(0,0,0,.12);transform:translateY(-2px)}
+    .vthumb{position:relative;width:100%;padding-bottom:60%;overflow:hidden}
+    .vthumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .3s}
+    .vcard:hover .vthumb img{transform:scale(1.04)}
+    .vov{position:absolute;top:0;left:0;padding:10px 12px;z-index:1}
+    .vov::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.55) 0%,transparent 70%);pointer-events:none;border-radius:0}
+    .vdur{position:relative;display:inline-block;background:#14532d;color:#fff;font-weight:900;font-size:13px;padding:3px 9px;margin-bottom:6px;border-radius:2px}
+    .vtname{position:relative;color:#fff;font-weight:800;font-size:13px;text-transform:uppercase;line-height:1.3;text-shadow:0 1px 3px rgba(0,0,0,.6);max-width:160px}
+    .vlevel{position:relative;color:rgba(255,255,255,.88);font-size:11px;margin-top:3px;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+    .vlock{position:absolute;inset:0;background:rgba(0,0,0,.48);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#fff}
+    .vlock svg{opacity:.9}
+    .vlock span{font-size:13px;font-weight:600;opacity:.9}
+    .vfree{position:absolute;top:10px;right:10px;background:#059669;color:#fff;font-weight:700;font-size:11px;padding:3px 9px;border-radius:20px;z-index:2}
+    .vinfo{padding:12px 16px 14px}
+    .vteacher{font-size:12px;color:var(--pm);font-weight:600;margin-bottom:5px}
+    .vrow{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+    .vname{font-weight:700;font-size:14px;color:var(--txt);line-height:1.4;flex:1}
+    .vbtn{width:34px;height:34px;border:2px solid var(--bd);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:none;cursor:pointer;color:var(--tg)}
+    .vbtn:hover{border-color:var(--pm);color:var(--pm)}
+    .vbadge{display:inline-block;background:#f3f4f6;border-radius:20px;padding:3px 10px;font-size:12px;color:var(--ts);margin-top:8px}
+    /* SUBSCRIPTION MODAL */
+    .mo{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:20px}
+    .mo.on{display:flex}
+    .mobox{background:#fff;border-radius:20px;max-width:400px;width:100%;overflow:hidden;max-height:95vh;overflow-y:auto}
+    .moimg{position:relative;height:190px;overflow:hidden}
+    .moimg img{width:100%;height:100%;object-fit:cover;object-position:top}
+    .mox{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.9);border:none;border-radius:50%;width:34px;height:34px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:var(--f);color:#111;z-index:1}
+    .mobody{padding:24px}
+    .motitle{font-weight:800;font-size:22px;color:var(--p);margin-bottom:18px}
+    .flabel{font-size:13px;font-weight:600;color:var(--ts);margin-bottom:5px;display:block}
+    .finput{width:100%;padding:12px 14px;border:none;background:#f3f4f6;border-radius:10px;font-size:15px;outline:none;color:var(--txt);font-family:var(--f);margin-bottom:16px}
+    .finput:focus{background:#dcfce7}
+    .plan-label{font-size:14px;font-weight:700;color:var(--txt);margin-bottom:10px}
+    .plan-card{display:flex;align-items:center;justify-content:space-between;border:2px solid var(--bd);border-radius:12px;padding:14px 16px;cursor:pointer;margin-bottom:10px;transition:border-color .2s,background .2s}
+    .plan-card:hover,.plan-card.sel{border-color:var(--p);background:var(--pll)}
+    .plan-name{font-weight:800;font-size:17px;color:var(--txt)}
+    .plan-right{text-align:right}
+    .plan-price{font-weight:800;font-size:17px;color:var(--txt)}
+    .plan-trial{font-size:12px;color:var(--tg);margin-top:2px}
+    .btn-trial{width:100%;background:var(--p);color:#fff;padding:14px;border-radius:12px;font-weight:700;font-size:16px;border:none;cursor:pointer;font-family:var(--f);margin-top:14px}
+    .btn-trial:hover{background:var(--ph)}
+    .motiny{text-align:center;font-size:12px;color:var(--tg);margin-top:10px}
+    /* LOGIN MODAL */
+    .lmobox{background:#fff;border-radius:20px;max-width:400px;width:100%;padding:32px;max-height:95vh;overflow-y:auto}
+    .lmotitle{font-weight:800;font-size:22px;color:var(--p);margin-bottom:20px}
+    .btn-login-submit{width:100%;background:var(--p);color:#fff;padding:14px;border-radius:12px;font-weight:700;font-size:16px;border:none;cursor:pointer;font-family:var(--f);margin-top:6px}
+    .btn-login-submit:hover{background:var(--ph)}
+    .login-switch{text-align:center;font-size:14px;color:var(--tg);margin-top:12px}
+    .login-switch a{color:var(--pm);cursor:pointer;font-weight:600}
+  </style>
+</head>
+<body>
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">RUN SMART</a>
+  <div class="nav-right">
+    <a href="practice.html" class="nav-link active">Train</a>
+    <a href="courses.html" class="nav-link">Courses</a>
+    <button class="btn-nav" id="nav-btn">Join Free</button>
+    <div class="ham-wrap">
+      <button class="nav-ham" id="ham-btn" onclick="toggleHam(event)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="ham-drop" id="ham-drop">
+        <a href="badges.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M12 13v9M9 19l3-3 3 3"/></svg>Milestones</a>
+        <a href="race-day.html" class="ham-item" style="color:#f97316"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14H11L10 22L20 10H13L13 2Z"/></svg>Race Day Secrets <span style="background:#f97316;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:auto">Premium</span></a>
+        <a href="mailto:info@runsmart.co" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>Support</a>
+        <a href="privacy.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Privacy Policy</a>
+        <a href="terms.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>Terms of Service</a>
+        <a href="#" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>About</a>
+        <div class="ham-div"></div>
+        <button class="ham-item" id="ham-login-btn" onclick="handleHamLogin()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10,17 15,12 10,7"/><line x1="15" y1="12" x2="3" y2="12"/></svg><span id="ham-login-txt">Log In</span></button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="page-title">Train</div>
+  <div class="page-sub">Progressive workouts that build real endurance, improve your form, and make you faster — from your very first run.</div>
+
+  <!-- WORKOUTS -->
+  <div class="sec-head">
+    <div class="sec-title">Workouts</div>
+    <button class="btn-viewall" onclick="toggleViewAll('classes-grid','classes-toggle')">View all</button>
+  </div>
+  <div class="card-grid" id="classes-grid"></div>
+
+  <!-- PLANS -->
+  <div class="sec-head" style="margin-top:48px">
+    <div class="sec-title">Plans</div>
+    <button class="btn-viewall" onclick="toggleViewAll('series-grid','series-toggle')">View all</button>
+  </div>
+  <div class="card-grid" id="series-grid"></div>
+</div>
+
+<!-- SUBSCRIPTION MODAL -->
+<div class="mo" id="sub-modal">
+  <div class="mobox">
+    <div class="moimg">
+      <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&q=80" alt="Run Smart"/>
+      <button class="mox" onclick="closeSub()">×</button>
+    </div>
+    <div class="mobody">
+      <div class="motitle">Unlock Run Smart</div>
+      <label class="flabel">Email</label>
+      <input class="finput" type="email" id="sub-email" placeholder="email address"/>
+      <div class="plan-label">Choose Your Plan:</div>
+      <div class="plan-card sel" id="plan-annual" onclick="selectPlan('annual')">
+        <div class="plan-name">Annual</div>
+        <div class="plan-right"><div class="plan-price">$180 / year</div></div>
+      </div>
+      <div class="plan-card" id="plan-monthly" onclick="selectPlan('monthly')">
+        <div class="plan-name">Monthly</div>
+        <div class="plan-right"><div class="plan-price">$19 / month</div></div>
+      </div>
+      <button class="btn-trial" onclick="startTrial()">Get Access Now</button>
+      <div class="motiny">Cancel anytime. Immediate full access.</div>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="mo" id="login-modal">
+  <div class="lmobox">
+    <button class="mox" style="position:static;margin-bottom:16px;margin-left:auto;display:flex" onclick="closeLogin()">×</button>
+    <div class="lmotitle" id="login-modal-title">Welcome back</div>
+    <label class="flabel">Email</label>
+    <input class="finput" type="email" id="login-email" placeholder="email address"/>
+    <label class="flabel">Password</label>
+    <input class="finput" type="password" id="login-pass" placeholder="password"/>
+    <button class="btn-login-submit" onclick="doLogin()">Log In</button>
+    <div class="login-switch">Don't have an account? <a onclick="goSignup()">Sign up free</a></div>
+  </div>
+</div>
+
+<script>
+/* ── DATA ── */
+const DC=[
+  {id:1,title:"20 Min Easy Run Technique",teacher:"Vineta",duration:"20 mins",level:"beginner",thumbnail:"https://images.unsplash.com/photo-1571731956672-f2b94d7dd0cb?w=400&q=80",isFree:true,desc:"The foundation of every great runner: the easy run done right. Learn the pace, breathing, and rhythm that builds your aerobic base without burning you out. Beginners consistently report that this single session reframes what running feels like — it stops being hard and starts being enjoyable."},
+  {id:2,title:"25 Min Running Form Fundamentals",teacher:"Vineta",duration:"25 mins",level:"beginner",thumbnail:"https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=400&q=80",isFree:true,desc:"Most running injuries come from form, not fitness. This 25-minute session teaches the four elements of efficient running form — posture, cadence, foot strike, and arm drive. Runners who fix their form first go further, faster, and with far less pain. Start here."},
+  {id:3,title:"30 Min Interval Training Intro",teacher:"Vineta",duration:"30 mins",level:"beginner",thumbnail:"https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&q=80",isFree:false,desc:"Your first taste of structured speedwork — without the suffering. This beginner-friendly interval session alternates running and walking in precise ratios that train your cardiovascular system to recover faster, tolerate effort longer, and handle race-day pace with confidence. The session most members say changed everything."},
+  {id:4,title:"35 Min Cadence & Stride Drills",teacher:"Vineta",duration:"35 mins",level:"intermediate",thumbnail:"https://images.unsplash.com/photo-1483721310020-03333e577078?w=400&q=80",isFree:false,desc:"Cadence — steps per minute — is the single most powerful lever for becoming a more efficient runner. This drill session targets the neuromuscular patterns that govern your stride, teaching your body to turn over faster with less effort. Two weeks of practice and your easy pace will feel like a different gear."},
+  {id:5,title:"40 Min Hill Training Session",teacher:"Vineta",duration:"40 mins",level:"intermediate",thumbnail:"https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=400&q=80",isFree:false,desc:"Hills build the strength, power, and cardiovascular capacity that flat training can't touch. This guided session walks you through the exact effort, form, and recovery that turns hill repeats from brutal to transformative. Runners who train hills run every other surface with surprising ease."},
+  {id:6,title:"45 Min Tempo Run Fundamentals",teacher:"Vineta",duration:"45 mins",level:"intermediate",thumbnail:"https://images.unsplash.com/photo-1529634806980-59cd74b52313?w=400&q=80",isFree:false,desc:"The tempo run is the king of endurance training — it raises your lactate threshold, the pace at which running starts to feel hard. Done right, it's comfortably uncomfortable for 20-25 minutes and transforms your race pace. This session teaches you how to find your tempo zone, hold it, and build on it week by week."}
+];
+const DS=[
+  {id:1,title:"Couch to 5K: 8-Week Plan",teacher:"Vineta",classCount:8,thumbnail:"https://images.unsplash.com/photo-1517649763962-0c623066013b?w=400&q=80",isFree:false,desc:"The complete 8-week system that takes you from zero running fitness to crossing your first 5K finish line. Three sessions a week, every week, progressively building your endurance the way sports science says it should be built. The plan thousands of first-time runners call the thing that finally worked."},
+  {id:2,title:"5K to 10K Progression Plan",teacher:"Vineta",classCount:10,thumbnail:"https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400&q=80",isFree:false,desc:"You can run a 5K. Now it's time to double it — the right way. This 10-session plan bridges the gap between 5K fitness and 10K readiness, adding mileage strategically while introducing the speed and stamina work that makes the longer distance feel achievable. By week 8, 10K will feel like your new easy distance."},
+  {id:3,title:"Running Form Masterclass",teacher:"Vineta",classCount:6,thumbnail:"https://images.unsplash.com/photo-1581889470536-467cc68e5f6b?w=400&q=80",isFree:false,desc:"Six targeted sessions that rebuild your running mechanics from the ground up: foot strike, cadence, posture, hip drive, arm carry, and breathing rhythm. The runners who complete this series report fewer injuries, faster times, and a running gait their coaches actually notice. Efficient form is a skill — this is how you build it."},
+  {id:4,title:"Injury-Free Running System",teacher:"Vineta",classCount:7,thumbnail:"https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=400&q=80",isFree:false,desc:"Most running injuries are not accidents — they're predictable consequences of doing too much, too soon, with poor form and no recovery protocol. This 7-session system teaches you how to train your body to handle mileage: the warm-up sequences, strength exercises, and recovery practices that keep you on the road instead of on the injury table."},
+  {id:5,title:"First Half Marathon Blueprint",teacher:"Vineta",classCount:14,thumbnail:"https://images.unsplash.com/photo-1487466365202-1afdb86c764e?w=400&q=80",isFree:false,desc:"14 sessions covering every dimension of half marathon preparation — endurance, pacing strategy, long run progression, nutrition basics, and race-day execution. By the final session, you will know exactly what pace to run, how to fuel, and how to cross the finish line feeling strong rather than surviving. The complete guide to your first or best half marathon."},
+  {id:6,title:"Speed & Interval Training",teacher:"Vineta",classCount:9,thumbnail:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80",isFree:false,desc:"Nine progressive interval sessions that systematically raise your speed ceiling — the pace you can sustain for a race. Built on the same training principles used by elite coaches, adapted for beginner-intermediate runners who want to stop just finishing races and start racing them. By session 9, your 5K time will tell the whole story."}
+];
+
+function initData(){
+  if(!localStorage.getItem('rn_init_v3')){
+    localStorage.setItem('rn_classes',JSON.stringify(DC));
+    localStorage.setItem('rn_series',JSON.stringify(DS));
+    localStorage.setItem('rn_init_v3','1');
+  }
+}
+function getClasses(){try{return JSON.parse(localStorage.getItem('rn_classes'))||DC;}catch(e){return DC;}}
+function getSeries(){try{return JSON.parse(localStorage.getItem('rn_series'))||DS;}catch(e){return DS;}}
+function getUser(){try{return JSON.parse(localStorage.getItem('rn_user'));}catch(e){return null;}}
+function canAccess(item,user){if(item.isFree)return true;return user&&user.isPremium;}
+
+/* ── RENDER ── */
+function durShort(d){return d.replace(' mins','').replace(' min','')+' MIN';}
+
+function renderClassCard(cls,user){
+  const locked=!canAccess(cls,user);
+  const durLabel=durShort(cls.duration);
+  const words=cls.title.toUpperCase().replace(/\s*[-–]\s*ALL LEVELS/,'').replace(/\d+\s*MIN\s*/,'').trim();
+  return `<div class="vcard" onclick="openClass(${cls.id})">
+    <div class="vthumb">
+      <img src="${cls.thumbnail}" loading="lazy" alt="${cls.title}"/>
+      <div class="vov">
+        <span class="vdur">${durLabel}</span>
+        <div class="vtname">${words}</div>
+        <div class="vlevel">${cls.level}</div>
+      </div>
+      ${locked?`<div class="vlock"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Members Only</span></div>`:''}
+      ${cls.isFree?'<span class="vfree">FREE</span>':''}
+    </div>
+    <div class="vinfo">
+      <div class="vteacher">${cls.teacher}</div>
+      <div class="vrow">
+        <div class="vname">${cls.title}</div>
+        <button class="vbtn">${locked?'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>':'<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>'}</button>
+      </div>
+      <span class="vbadge">${cls.duration}</span>
+    </div>
+  </div>`;
+}
+
+function renderSeriesCard(s,user){
+  const locked=!canAccess(s,user);
+  return `<div class="vcard" onclick="openSeries(${s.id})">
+    <div class="vthumb">
+      <img src="${s.thumbnail}" loading="lazy" alt="${s.title}"/>
+      ${locked?`<div class="vlock"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Members Only</span></div>`:''}
+      ${s.isFree?'<span class="vfree">FREE</span>':''}
+    </div>
+    <div class="vinfo">
+      <div class="vteacher">${s.teacher}</div>
+      <div class="vrow">
+        <div class="vname">${s.title}</div>
+        <button class="vbtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><polyline points="2,10 22,10"/></svg></button>
+      </div>
+      <span class="vbadge">${s.classCount} sessions</span>
+    </div>
+  </div>`;
+}
+
+function renderAll(){
+  const user=getUser();
+  const classes=getClasses();
+  const series=getSeries();
+  document.getElementById('classes-grid').innerHTML=classes.map(c=>renderClassCard(c,user)).join('');
+  document.getElementById('series-grid').innerHTML=series.map(s=>renderSeriesCard(s,user)).join('');
+}
+
+/* ── NAVIGATION ── */
+function openClass(id){
+  const user=getUser();
+  const cls=getClasses().find(c=>c.id===id);
+  if(!cls)return;
+  if(!canAccess(cls,user)){goToPremium();return;}
+  window.location.href='video.html?id='+id+'&type=class';
+}
+function openSeries(id){
+  const user=getUser();
+  const s=getSeries().find(x=>x.id===id);
+  if(!s)return;
+  if(!canAccess(s,user)){goToPremium();return;}
+  alert('Plan: '+s.title+'\nThis would open the series player.');
+}
+
+/* ── PREMIUM REDIRECT ── */
+function goToPremium(){
+  const u=getUser();
+  const email=u?u.email||'':'';
+  localStorage.setItem('rn_pending',JSON.stringify({email,plan:'annual'}));
+  window.location.href='payment.html?plan=annual'+(email?'&email='+encodeURIComponent(email):'');
+}
+
+/* ── SUBSCRIPTION MODAL ── */
+let selPlan='annual';
+function openSub(){
+  const u=getUser();
+  if(u)document.getElementById('sub-email').value=u.email||'';
+  document.getElementById('sub-modal').classList.add('on');
+}
+function closeSub(){document.getElementById('sub-modal').classList.remove('on')}
+function selectPlan(p){
+  selPlan=p;
+  document.getElementById('plan-annual').classList.toggle('sel',p==='annual');
+  document.getElementById('plan-monthly').classList.toggle('sel',p==='monthly');
+}
+function startTrial(){
+  const email=document.getElementById('sub-email').value.trim();
+  if(!email){document.getElementById('sub-email').focus();return;}
+  localStorage.setItem('rn_pending',JSON.stringify({email,plan:selPlan}));
+  window.location.href='payment.html?plan='+selPlan+'&email='+encodeURIComponent(email);
+}
+document.getElementById('sub-modal').addEventListener('click',function(e){if(e.target===this)closeSub()});
+
+/* ── HAMBURGER ── */
+function toggleHam(e){e.stopPropagation();document.getElementById('ham-drop').classList.toggle('open')}
+document.addEventListener('click',function(){document.getElementById('ham-drop').classList.remove('open')});
+
+/* ── LOGIN ── */
+function handleHamLogin(){
+  const u=getUser();
+  if(u){localStorage.removeItem('rn_user');location.reload();}
+  else{document.getElementById('ham-drop').classList.remove('open');document.getElementById('login-modal').classList.add('on');}
+}
+function closeLogin(){document.getElementById('login-modal').classList.remove('on')}
+function doLogin(){
+  const email=document.getElementById('login-email').value.trim();
+  const pass=document.getElementById('login-pass').value.trim();
+  if(!email||!pass){alert('Please fill in all fields.');return;}
+  // In production: verify against backend. For demo, accept any credentials.
+  localStorage.setItem('rn_user',JSON.stringify({firstName:email.split('@')[0],email,isPremium:false}));
+  closeLogin();location.reload();
+}
+function goSignup(){closeLogin();window.location.href='index.html';}
+document.getElementById('login-modal').addEventListener('click',function(e){if(e.target===this)closeLogin()});
+
+/* ── NAV BUTTON ── */
+function updateNav(){
+  const u=getUser();
+  const btn=document.getElementById('nav-btn');
+  const loginTxt=document.getElementById('ham-login-txt');
+  if(u){
+    btn.textContent=u.firstName||'My Account';
+    btn.onclick=()=>{if(confirm('Log out?')){localStorage.removeItem('rn_user');location.reload();}};
+    if(loginTxt)loginTxt.textContent='Log Out';
+  }else{
+    btn.textContent='Join Free';
+    btn.onclick=()=>window.location.href='index.html#signup';
+    if(loginTxt)loginTxt.textContent='Log In';
+  }
+}
+
+function toggleViewAll(gridId){
+  const g=document.getElementById(gridId);
+  if(!g)return;
+  const cards=g.querySelectorAll('.vcard');
+  const isExpanded=g.dataset.expanded==='1';
+  cards.forEach((c,i)=>{if(i>=6)c.style.display=isExpanded?'none':'';});
+  g.dataset.expanded=isExpanded?'0':'1';
+}
+
+initData();renderAll();updateNav();
+</script>
+<footer style="background:#15803d;color:#fff;padding:28px 32px;text-align:center">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="font-size:14px;font-weight:700;margin-bottom:6px">Powered by Run Smart</div>
+    <div style="font-size:12px;opacity:.7;margin-bottom:14px">© 2026 RUN SMART · All rights reserved.</div>
+    <div style="display:flex;gap:28px;justify-content:center;font-size:14px">
+      <a href="mailto:info@runsmart.co" style="color:#86efac;text-decoration:none">Support</a>
+      <a href="terms.html" style="color:#86efac;text-decoration:none">Terms</a>
+      <a href="privacy.html" style="color:#86efac;text-decoration:none">Privacy</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

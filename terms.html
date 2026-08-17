@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Terms of Service – RUN SMART</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--p:#15803d;--pm:#16a34a;--ph:#166534;--pl:#dcfce7;--pll:#f0fdf4;--txt:#111827;--tg:#6b7280;--ts:#374151;--bd:#e5e7eb;--f:'Open Sans',sans-serif;--nh:64px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--f);color:var(--txt);background:#fff}
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.97);border-bottom:1px solid var(--pl);display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:var(--nh)}
+    .nav-logo{font-weight:900;font-size:16px;color:var(--p);letter-spacing:.06em;text-decoration:none}
+    .nav-left{display:flex;align-items:center;gap:20px}
+    .nav-back{display:flex;align-items:center;gap:6px;color:var(--p);font-weight:600;text-decoration:none;font-size:14px}
+    .nav-back:hover{opacity:.75}
+    .nav-back svg{transition:transform .15s}
+    .nav-back:hover svg{transform:translateX(-3px)}
+    .nav-right{display:flex;align-items:center;gap:20px}
+    .nav-link{color:#4b5563;font-weight:500;text-decoration:none;font-size:15px}
+    .nav-link:hover{color:var(--p)}
+    .btn-nav{background:var(--p);color:#fff;padding:9px 22px;border-radius:9999px;font-weight:600;border:none;cursor:pointer;font-size:14px;font-family:var(--f)}
+    .btn-nav:hover{background:var(--ph)}
+    .ham-wrap{position:relative}
+    .nav-ham{background:none;border:none;cursor:pointer;padding:6px;display:flex}
+    .ham-drop{display:none;position:absolute;top:calc(100% + 12px);right:0;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.14);min-width:220px;padding:8px 0;z-index:300}
+    .ham-drop.open{display:block}
+    .ham-item{display:flex;align-items:center;gap:12px;padding:11px 20px;color:var(--txt);text-decoration:none;font-size:15px;cursor:pointer;transition:background .15s;border:none;background:none;width:100%;font-family:var(--f);text-align:left}
+    .ham-item:hover{background:var(--pll)}
+    .ham-div{height:1px;background:var(--bd);margin:6px 0}
+
+    /* CONTENT */
+    .page-wrap{max-width:760px;margin:0 auto;padding:calc(var(--nh) + 52px) 32px 80px}
+    .page-eyebrow{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pm);margin-bottom:10px}
+    .page-title{font-size:36px;font-weight:900;color:var(--p);margin-bottom:8px;line-height:1.15}
+    .page-date{font-size:13px;color:var(--tg);margin-bottom:36px}
+    .intro{font-size:15px;color:var(--ts);line-height:1.8;background:var(--pll);border-left:4px solid var(--pm);padding:18px 22px;border-radius:0 10px 10px 0;margin-bottom:40px}
+
+    /* SECTIONS */
+    .tos-section{margin-bottom:36px}
+    .tos-num{display:inline-block;background:var(--p);color:#fff;font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px;letter-spacing:.04em;margin-bottom:10px}
+    .tos-title{font-size:20px;font-weight:800;color:var(--p);margin-bottom:12px}
+    .tos-body{font-size:15px;color:var(--ts);line-height:1.85}
+    .tos-body p{margin-bottom:12px}
+    .tos-body p:last-child{margin-bottom:0}
+    .tos-body ul{padding-left:20px;margin:10px 0 12px}
+    .tos-body ul li{margin-bottom:7px;line-height:1.7}
+    .tos-body a{color:var(--pm);text-decoration:none}
+    .tos-body a:hover{text-decoration:underline}
+    .highlight-box{background:var(--pll);border:1px solid var(--pl);border-radius:10px;padding:16px 20px;margin:14px 0;font-size:14px;color:var(--ts);line-height:1.7}
+    .highlight-box b{color:var(--p)}
+    .divider{height:1px;background:var(--bd);margin:36px 0}
+    .signature{margin-top:40px;padding-top:32px;border-top:2px solid var(--pl)}
+    .sig-name{font-size:20px;font-weight:900;color:var(--p);margin-bottom:4px}
+    .sig-title{font-size:14px;color:var(--tg)}
+    .sig-contact{margin-top:12px;font-size:14px;color:var(--ts)}
+    .sig-contact a{color:var(--pm);text-decoration:none}
+    @media(max-width:640px){.page-wrap{padding-left:16px;padding-right:16px}.nav-link{display:none}}
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-back">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Home
+    </a>
+    <a href="index.html" class="nav-logo">RUN SMART</a>
+  </div>
+  <div class="nav-right">
+    <a href="practice.html" class="nav-link">Train</a>
+    <a href="courses.html" class="nav-link">Courses</a>
+    <button class="btn-nav" onclick="window.location.href='index.html'">Join Free</button>
+    <div class="ham-wrap">
+      <button class="nav-ham" onclick="toggleHam(event)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="ham-drop" id="ham-drop">
+        <a href="badges.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M12 13v9M9 19l3-3 3 3"/></svg>Milestones</a>
+        <a href="race-day.html" class="ham-item" style="color:#f97316"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l4-8 4 4 4-6 4 10"/><path d="M3 20h18"/></svg>Race Day Secrets <span style="background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:auto">Premium</span></a>
+        <a href="mailto:info@runsmart.co" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>Support</a>
+        <a href="privacy.html" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Privacy Policy</a>
+        <a href="terms.html" class="ham-item" style="color:var(--p);font-weight:600"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>Terms of Service</a>
+        <a href="#" class="ham-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>About</a>
+        <div class="ham-div"></div>
+        <button class="ham-item" onclick="window.location.href='index.html'"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10,17 15,12 10,7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Log In</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-wrap">
+
+  <div class="page-eyebrow">Legal</div>
+  <h1 class="page-title">Terms of Service</h1>
+  <div class="page-date">Last updated: August 2026 &nbsp;·&nbsp; Run Smart</div>
+
+  <div class="intro">
+    Welcome to Run Smart, where we offer online running workouts, training plans, courses, and exclusive content. Please read the following terms and conditions carefully before using our platform and participating in any sessions. By accessing or using Run Smart you agree to be bound by these terms.
+  </div>
+
+  <!-- 1. MEMBERSHIP -->
+  <div class="tos-section">
+    <div class="tos-num">1</div>
+    <div class="tos-title">Membership &amp; Subscription Terms</div>
+    <div class="tos-body">
+      <div class="highlight-box">
+        <b>Free Trial:</b> New members are eligible for a <b>7-day free trial</b> when signing up for the standard monthly ($19/month) or annual ($180/year) membership.<br><br>
+        <b>Annual Discounted Plan:</b> Any discounted annual membership offer does not include a free trial, but comes with a <b>7-day money-back guarantee</b>.
+      </div>
+      <div class="highlight-box" style="margin-top:12px">
+        <b>Race Day Secrets — Annual Plan Only:</b> Access to the Race Day Secrets section is <b>not included</b> in the standard free trial and is not available on the monthly plan. A dedicated Annual Membership ($180/year) is required. This section contains professionally produced premium race preparation content accessible to annual subscribers only.
+      </div>
+      <ul>
+        <li>After the trial period ends, the selected subscription plan will be automatically charged using the payment method provided at signup.</li>
+        <li>Memberships are <strong>auto-renewed</strong> at the end of each billing cycle (monthly or annually) unless canceled before the next renewal date.</li>
+        <li>You may cancel your membership at any time. Once a charge has been processed, your membership remains active for the full paid period and is non-refundable, except where covered by the 7-day money-back guarantee.</li>
+        <li>Run Smart reserves the right to modify subscription pricing with reasonable advance notice to active members.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 2. LIABILITY -->
+  <div class="tos-section">
+    <div class="tos-num">2</div>
+    <div class="tos-title">Liability</div>
+    <div class="tos-body">
+      <p>The Run Smart platform is owned and operated independently. We carry public liability insurance to protect our members in the unlikely event of accidents or injuries that may occur during in-person sessions where applicable.</p>
+      <p>By participating in any Run Smart session, program, or practice — whether online or in person — <strong>you assume full responsibility for any injuries or damages that may occur</strong>. Run Smart, its coaches, and affiliates are not liable for any claims or damages arising out of your participation.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 3. HEALTH & SAFETY -->
+  <div class="tos-section">
+    <div class="tos-num">3</div>
+    <div class="tos-title">Health &amp; Safety</div>
+    <div class="tos-body">
+      <p>Run Smart running sessions involve physical activity. We require all participants to <strong>consult with a qualified physician or healthcare provider before starting any new exercise program</strong>, especially if you have any pre-existing medical conditions, injuries, or concerns.</p>
+      <p>By participating in our running sessions you confirm that:</p>
+      <ul>
+        <li>You are physically and mentally capable of performing the running sessions presented.</li>
+        <li>You assume full responsibility for your own health and safety throughout any running session.</li>
+        <li>If at any point during a running session you experience pain, discomfort, dizziness, or any unusual symptoms, you will stop immediately and seek medical advice before continuing.</li>
+      </ul>
+      <p>Our coaches provide general wellness guidance and are not medical professionals. Nothing on this platform constitutes medical advice.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 4. PAYMENT -->
+  <div class="tos-section">
+    <div class="tos-num">4</div>
+    <div class="tos-title">Payment</div>
+    <div class="tos-body">
+      <p>Run Smart offers online membership subscriptions and individual course purchases. All fees are clearly displayed at the point of purchase.</p>
+      <ul>
+        <li>All fees must be paid in advance. Payments are processed securely through <strong>Stripe</strong>. We accept major credit and debit cards.</li>
+        <li>Individual course purchases are one-time charges and grant lifetime access to that course content.</li>
+        <li>Run Smart reserves the right to adjust pricing at any time. Active members will be notified of changes before their next renewal date.</li>
+        <li>All prices are listed in USD. Currency conversion fees, if any, are the responsibility of the member's bank or card issuer.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 5. INTELLECTUAL PROPERTY -->
+  <div class="tos-section">
+    <div class="tos-num">5</div>
+    <div class="tos-title">Intellectual Property</div>
+    <div class="tos-body">
+      <p>All content on the Run Smart platform — including but not limited to videos, workout recordings, plans, course materials, text, images, graphics, logos, and instructional sequences — is the <strong>exclusive property of Run Smart</strong> and is protected by applicable copyright and intellectual property laws.</p>
+      <ul>
+        <li>You may not copy, reproduce, distribute, re-upload, publicly display, broadcast, or use any content from this platform without express written permission from Run Smart.</li>
+        <li>Your membership grants you a personal, non-transferable, non-exclusive license to access and view content for your own private, non-commercial use only.</li>
+        <li>Content shared through Run Smart may not be downloaded, screen-recorded, or reproduced by any means. Each video is watermarked with member identity data; unauthorized distribution is traceable and will result in immediate account termination and potential legal action.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 6. PREMIUM CONTENT -->
+  <div class="tos-section">
+    <div class="tos-num">6</div>
+    <div class="tos-title">Premium Content (Race Day Secrets Section)</div>
+    <div class="tos-body">
+      <div class="highlight-box">
+        <b>Annual Membership Only — No Free Trial:</b> The Race Day Secrets section requires a dedicated <b>Annual Membership ($180/year)</b>. No free trial, monthly subscription, or promotional access grants entry to this section. This is an exclusive premium tier available solely to annual subscribers.
+      </div>
+      <ul>
+        <li>The Race Day Secrets section is available <strong>exclusively to Annual Members</strong> — no free trial or monthly plan grants access to this section.</li>
+        <li>All Race Day Secrets sessions are produced and led by <strong>certified running coaches and sports scientists</strong> under professional conditions. The content is intended for adult wellness, race performance, and competitive training education.</li>
+        <li>Sharing, reproducing, or distributing any Race Day Secrets content is strictly prohibited.</li>
+        <li>Run Smart reserves the right to remove access to the Race Day Secrets section from any member who violates these terms, without refund.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 7. PRIVACY -->
+  <div class="tos-section">
+    <div class="tos-num">7</div>
+    <div class="tos-title">Privacy</div>
+    <div class="tos-body">
+      <p>Run Smart respects your privacy. We collect only the information necessary to operate the platform and deliver your membership, including your name, email address, and payment details (processed securely by Stripe — we do not store full card numbers).</p>
+      <p>We will not sell, rent, or share your personal information with third parties without your explicit consent, except as required by law or to deliver our services (e.g., payment processing).</p>
+      <p>For full details on how we handle your data, please refer to our <a href="privacy.html">Privacy Policy</a>.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 8. CANCELLATIONS & REFUNDS -->
+  <div class="tos-section">
+    <div class="tos-num">8</div>
+    <div class="tos-title">Cancellations &amp; Refunds</div>
+    <div class="tos-body">
+      <p><strong>Memberships:</strong></p>
+      <ul>
+        <li>You may cancel your subscription at any time through your account settings.</li>
+        <li>Cancellations take effect at the end of the current billing period. You retain access until that date.</li>
+        <li>Once a charge has been processed, the membership fee for that period is non-refundable, except within the 7-day money-back guarantee window where applicable.</li>
+      </ul>
+      <p><strong>In-Person Sessions (where offered):</strong></p>
+      <ul>
+        <li>Cancellations made at least <strong>24 hours in advance</strong> are eligible for a full refund.</li>
+        <li>Cancellations made within 24 hours of the session start time are non-refundable.</li>
+      </ul>
+      <p><strong>Online Sessions &amp; Course Purchases:</strong></p>
+      <ul>
+        <li>Refunds are not available for online sessions once they have started or for individual course purchases once access has been granted.</li>
+      </ul>
+      <p>To request a refund within an eligible window, contact us at <a href="mailto:info@runsmart.co">info@runsmart.co</a>.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 9. CONDUCT -->
+  <div class="tos-section">
+    <div class="tos-num">9</div>
+    <div class="tos-title">Member Conduct</div>
+    <div class="tos-body">
+      <p>Members agree to use the Run Smart platform in a lawful, respectful manner. The following are strictly prohibited:</p>
+      <ul>
+        <li>Sharing account credentials with others. Memberships are for individual use only.</li>
+        <li>Recording, downloading, or distributing any platform content by any means.</li>
+        <li>Attempting to circumvent any technical protection measures on the platform.</li>
+        <li>Any conduct that is abusive, harassing, or harmful to other members, coaches, or Run Smart staff.</li>
+      </ul>
+      <p>Violations may result in immediate account termination without refund and, where applicable, legal action.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 10. AMENDMENTS -->
+  <div class="tos-section">
+    <div class="tos-num">10</div>
+    <div class="tos-title">Amendments</div>
+    <div class="tos-body">
+      <p>Run Smart reserves the right to update these Terms of Service at any time. When material changes are made, we will update the date at the top of this page and, where appropriate, notify active members by email.</p>
+      <p>By continuing to use the platform after any update, you agree to be bound by the revised terms. We encourage you to review this page periodically.</p>
+    </div>
+  </div>
+
+  <!-- SIGNATURE -->
+  <div class="signature">
+    <div class="sig-name">Run Smart</div>
+    <div class="sig-title">Online Running Training Platform</div>
+    <div class="sig-contact">
+      Questions about these terms? <a href="mailto:info@runsmart.co">info@runsmart.co</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleHam(e){e.stopPropagation();document.getElementById('ham-drop').classList.toggle('open')}
+document.addEventListener('click',()=>document.getElementById('ham-drop').classList.remove('open'));
+</script>
+<footer style="background:#15803d;color:#fff;padding:28px 32px;text-align:center">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="font-size:14px;font-weight:700;margin-bottom:6px">Powered by Run Smart</div>
+    <div style="font-size:12px;opacity:.7;margin-bottom:14px">© 2026 RUN SMART · All rights reserved.</div>
+    <div style="display:flex;gap:28px;justify-content:center;font-size:14px">
+      <a href="mailto:info@runsmart.co" style="color:#86efac;text-decoration:none">Support</a>
+      <a href="terms.html" style="color:#86efac;text-decoration:none">Terms</a>
+      <a href="privacy.html" style="color:#86efac;text-decoration:none">Privacy</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

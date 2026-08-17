@@ -1,0 +1,786 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Admin – RUN SMART</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--p:#15803d;--pm:#16a34a;--ph:#166534;--pl:#dcfce7;--pll:#f0fdf4;--txt:#111827;--tg:#6b7280;--ts:#374151;--bd:#e5e7eb;--f:'Open Sans',sans-serif;--rd:#ef4444;--gn:#059669}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--f);background:#f8faff;color:var(--txt);min-height:100vh}
+
+    /* ── GATE ─────────────────────────────────── */
+    .gate{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+    .gate-box{background:#fff;border-radius:20px;padding:48px 40px;max-width:400px;width:100%;box-shadow:0 4px 24px rgba(0,0,0,.1);text-align:center}
+    .gate-icon{font-size:48px;margin-bottom:16px}
+    .gate-title{font-size:26px;font-weight:800;color:var(--p);margin-bottom:8px}
+    .gate-sub{font-size:14px;color:var(--tg);margin-bottom:28px}
+    .gate-err{color:var(--rd);font-size:13px;min-height:18px;margin-bottom:8px}
+
+    /* ── APP ──────────────────────────────────── */
+    .app{display:none;min-height:100vh}
+    .app.on{display:flex;flex-direction:column}
+    .top-bar{background:var(--p);color:#fff;padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between}
+    .top-logo{font-weight:900;font-size:16px;letter-spacing:.06em}
+    .top-sub{font-size:12px;opacity:.7;margin-top:2px}
+    .top-right{display:flex;align-items:center;gap:16px}
+    .btn-top{background:rgba(255,255,255,.15);color:#fff;border:none;padding:7px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-family:var(--f);text-decoration:none;display:inline-block}
+    .btn-top:hover{background:rgba(255,255,255,.25)}
+
+    /* ── TABS ─────────────────────────────────── */
+    .tabs{background:#fff;border-bottom:1px solid var(--bd);padding:0 32px;display:flex;gap:4px}
+    .tab{padding:14px 20px;font-weight:600;font-size:14px;cursor:pointer;border-bottom:3px solid transparent;color:var(--tg);transition:color .15s,border-color .15s}
+    .tab.active{color:var(--p);border-bottom-color:var(--p)}
+    .tab:hover{color:var(--p)}
+
+    /* ── CONTENT AREA ─────────────────────────── */
+    .content{flex:1;padding:32px;max-width:1100px;margin:0 auto;width:100%}
+    .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+    .sec-title{font-size:22px;font-weight:800}
+    .btn-add{background:var(--p);color:#fff;padding:10px 22px;border-radius:10px;font-weight:600;font-size:14px;border:none;cursor:pointer;font-family:var(--f);display:flex;align-items:center;gap:8px}
+    .btn-add:hover{background:var(--ph)}
+
+    /* ── TABLE ────────────────────────────────── */
+    .tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+    .tbl th{background:var(--pll);color:var(--p);font-weight:700;font-size:13px;padding:13px 16px;text-align:left}
+    .tbl td{padding:12px 16px;border-top:1px solid #f3f4f6;font-size:14px;vertical-align:middle}
+    .tbl tr:hover td{background:#fafbff}
+    .thumb-sm{width:60px;height:40px;object-fit:cover;border-radius:6px;border:1px solid var(--bd)}
+    .badge-free{background:#dcfce7;color:#166534;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px}
+    .badge-paid{background:var(--pl);color:var(--p);font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px}
+    .tbl-actions{display:flex;gap:8px}
+    .btn-edit{background:#f3f4f6;color:var(--ts);border:none;padding:6px 14px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--f)}
+    .btn-edit:hover{background:var(--pl);color:var(--p)}
+    .btn-del{background:#fef2f2;color:var(--rd);border:none;padding:6px 14px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--f)}
+    .btn-del:hover{background:#fee2e2}
+    .empty-row{text-align:center;color:var(--tg);padding:48px 20px;font-size:15px}
+
+    /* ── FORM MODAL ───────────────────────────── */
+    .mo{display:none;position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.5);align-items:center;justify-content:center;padding:20px}
+    .mo.on{display:flex}
+    .mobox{background:#fff;border-radius:18px;max-width:560px;width:100%;max-height:92vh;overflow-y:auto;padding:32px}
+    .mobox h3{font-size:20px;font-weight:800;margin-bottom:20px;color:var(--p)}
+    .form-row{margin-bottom:16px}
+    .flabel{display:block;font-size:13px;font-weight:600;color:var(--ts);margin-bottom:5px}
+    .finput{width:100%;padding:11px 14px;border:1px solid var(--bd);border-radius:8px;font-size:14px;outline:none;font-family:var(--f);color:var(--txt);transition:border-color .2s}
+    .finput:focus{border-color:var(--pm)}
+    textarea.finput{resize:vertical;min-height:76px}
+    .grid-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .toggle-row{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+    .toggle{position:relative;width:44px;height:24px;cursor:pointer;flex-shrink:0}
+    .toggle input{opacity:0;width:0;height:0}
+    .tslide{position:absolute;inset:0;background:#cbd5e1;border-radius:9999px;transition:.2s}
+    .tslide:before{content:'';position:absolute;width:18px;height:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.2s}
+    .toggle input:checked + .tslide{background:var(--gn)}
+    .toggle input:checked + .tslide:before{transform:translateX(20px)}
+    .toggle-label{font-size:14px;font-weight:600;color:var(--ts)}
+    .mo-foot{display:flex;gap:12px;margin-top:20px}
+    .btn-save{flex:1;background:var(--p);color:#fff;padding:13px;border-radius:10px;font-weight:700;font-size:15px;border:none;cursor:pointer;font-family:var(--f)}
+    .btn-save:hover{background:var(--ph)}
+    .btn-cancel-mo{background:#f3f4f6;color:var(--ts);padding:13px;border-radius:10px;font-weight:600;font-size:15px;border:none;cursor:pointer;font-family:var(--f)}
+    .btn-cancel-mo:hover{background:var(--bd)}
+
+    /* ── IMAGE PICKER ─────────────────────────── */
+    .img-picker{width:100%;margin-bottom:16px}
+    .img-picker-label{display:block;font-size:13px;font-weight:600;color:var(--ts);margin-bottom:8px}
+    .img-picker-area{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#f3f4f6;border:2px dashed var(--bd);cursor:pointer;transition:border-color .2s,background .2s;display:flex;align-items:center;justify-content:center}
+    .img-picker-area:hover{border-color:var(--pm);background:var(--pll)}
+    .img-picker-area.has-img{border-style:solid;border-color:var(--bd)}
+    .img-picker-area.has-img:hover .img-picker-overlay{opacity:1}
+    .img-picker-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .img-picker-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;opacity:0;transition:opacity .2s}
+    .img-picker-overlay span{color:#fff;font-size:13px;font-weight:600}
+    .img-picker-ph{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--tg);z-index:1}
+    .img-picker-ph span{font-size:13px;font-weight:500}
+    .img-picker-ph b{color:var(--pm)}
+
+    /* ── IMAGE PICKER POPUP ───────────────────── */
+    .img-pop{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.6);align-items:center;justify-content:center;padding:20px}
+    .img-pop.on{display:flex}
+    .img-pop-box{background:#fff;border-radius:16px;width:100%;max-width:460px;padding:28px;max-height:90vh;overflow-y:auto}
+    .img-pop-title{font-size:17px;font-weight:800;margin-bottom:18px;color:var(--p)}
+    .img-pop-tabs{display:flex;border:1px solid var(--bd);border-radius:10px;overflow:hidden;margin-bottom:20px}
+    .img-pop-tab{flex:1;padding:10px;font-size:14px;font-weight:600;border:none;background:#f9fafb;cursor:pointer;font-family:var(--f);color:var(--tg);transition:background .15s,color .15s}
+    .img-pop-tab.active{background:var(--p);color:#fff}
+
+    /* Drop zone */
+    .drop-zone{border:2px dashed var(--bd);border-radius:12px;padding:32px 20px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;background:#fafafa}
+    .drop-zone:hover,.drop-zone.drag-over{border-color:var(--pm);background:var(--pll)}
+    .drop-zone svg{margin-bottom:12px;color:var(--tg)}
+    .drop-zone p{font-size:14px;color:var(--ts);line-height:1.5}
+    .drop-zone small{font-size:12px;color:var(--tg)}
+
+    /* URL tab */
+    .url-row{display:flex;gap:10px;margin-top:4px}
+    .url-input{flex:1;padding:11px 14px;border:1px solid var(--bd);border-radius:8px;font-size:14px;outline:none;font-family:var(--f);color:var(--txt)}
+    .url-input:focus{border-color:var(--pm)}
+    .btn-use-url{background:var(--p);color:#fff;padding:11px 18px;border-radius:8px;border:none;font-weight:600;font-size:13px;cursor:pointer;font-family:var(--f);white-space:nowrap}
+    .btn-use-url:hover{background:var(--ph)}
+
+    /* Preview inside picker popup */
+    .pop-preview{margin-top:16px;display:none}
+    .pop-preview img{width:100%;border-radius:10px;object-fit:cover;max-height:200px}
+    .pop-preview-label{font-size:12px;color:var(--gn);font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+
+    .img-pop-foot{display:flex;gap:12px;margin-top:20px}
+    .btn-pop-cancel{flex:1;background:#f3f4f6;color:var(--ts);padding:12px;border-radius:10px;font-weight:600;font-size:14px;border:none;cursor:pointer;font-family:var(--f)}
+    .btn-pop-confirm{flex:1;background:var(--p);color:#fff;padding:12px;border-radius:10px;font-weight:700;font-size:14px;border:none;cursor:pointer;font-family:var(--f)}
+    .btn-pop-confirm:hover{background:var(--ph)}
+    .btn-pop-confirm:disabled{opacity:.45;cursor:not-allowed}
+
+    /* ── MODULE BUILDER ───────────────────────── */
+    .mod-block{background:#f8faff;border:1px solid var(--bd);border-radius:10px;padding:14px;margin-bottom:12px}
+    .mod-head-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+    .mod-title-in{flex:1;padding:8px 12px;border:1px solid var(--bd);border-radius:7px;font-size:13px;font-family:var(--f);outline:none}
+    .mod-title-in:focus{border-color:var(--pm)}
+    .btn-sm{background:var(--pll);color:var(--p);border:1px solid var(--pl);padding:6px 12px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--f)}
+    .lesson-row{display:flex;gap:8px;margin-bottom:8px;align-items:center}
+    .lesson-in{flex:1;padding:7px 11px;border:1px solid var(--bd);border-radius:7px;font-size:13px;font-family:var(--f);outline:none}
+    .lesson-in:focus{border-color:var(--pm)}
+    .lesson-dur{width:90px;padding:7px 11px;border:1px solid var(--bd);border-radius:7px;font-size:13px;font-family:var(--f);outline:none}
+    .btn-rm{background:#fef2f2;color:var(--rd);border:none;width:28px;height:28px;border-radius:6px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+    /* ── SHARED INPUTS ────────────────────────── */
+    .btn-p{width:100%;background:var(--p);color:#fff;padding:13px;border-radius:10px;font-weight:700;font-size:16px;border:none;cursor:pointer;font-family:var(--f);transition:background .2s}
+    .btn-p:hover{background:var(--ph)}
+
+    @media(max-width:768px){.tabs{padding:0 16px}.content{padding:20px 16px}.grid-row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<!-- ── GATE ───────────────────────────────────────────── -->
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <div class="gate-icon">🔑</div>
+    <div class="gate-title">Teacher Dashboard</div>
+    <div class="gate-sub">Enter your admin passphrase to manage Run Smart content.</div>
+    <input class="finput" type="password" id="pass-input" placeholder="Admin passphrase" onkeydown="if(event.key==='Enter')checkPass()"/>
+    <div class="gate-err" id="gate-err"></div>
+    <button class="btn-p" onclick="checkPass()">Enter Dashboard</button>
+    <div style="margin-top:16px;font-size:12px;color:var(--tg)">Default passphrase: <b>run2025</b><br>Change it in admin.html before going live.</div>
+  </div>
+</div>
+
+<!-- ── APP ────────────────────────────────────────────── -->
+<div class="app" id="app">
+  <div class="top-bar">
+    <div>
+      <div class="top-logo">RUN SMART — ADMIN</div>
+      <div class="top-sub">Content Manager</div>
+    </div>
+    <div class="top-right">
+      <a href="practice.html" class="btn-top" target="_blank">View Site ↗</a>
+      <button class="btn-top" onclick="logout()">Log Out</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" id="tab-classes" onclick="switchTab('classes')">Workouts</div>
+    <div class="tab" id="tab-series" onclick="switchTab('series')">Plans</div>
+    <div class="tab" id="tab-courses" onclick="switchTab('courses')">Courses</div>
+  </div>
+
+  <div class="content">
+    <!-- CLASSES PANE -->
+    <div id="pane-classes">
+      <div class="sec-head">
+        <div class="sec-title">Workouts</div>
+        <button class="btn-add" onclick="openAddClass()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Workout
+        </button>
+      </div>
+      <table class="tbl">
+        <thead><tr><th>Image</th><th>Title</th><th>Duration</th><th>Level</th><th>Access</th><th>Video</th><th>Actions</th></tr></thead>
+        <tbody id="classes-tbody"></tbody>
+      </table>
+    </div>
+
+    <!-- SERIES PANE -->
+    <div id="pane-series" style="display:none">
+      <div class="sec-head">
+        <div class="sec-title">Plans</div>
+        <button class="btn-add" onclick="openAddSeries()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Plan
+        </button>
+      </div>
+      <table class="tbl">
+        <thead><tr><th>Image</th><th>Title</th><th>Sessions</th><th>Access</th><th>Actions</th></tr></thead>
+        <tbody id="series-tbody"></tbody>
+      </table>
+    </div>
+
+    <!-- COURSES PANE -->
+    <div id="pane-courses" style="display:none">
+      <div class="sec-head">
+        <div class="sec-title">Courses</div>
+        <button class="btn-add" onclick="openAddCourse()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Course
+        </button>
+      </div>
+      <table class="tbl">
+        <thead><tr><th>Image</th><th>Title</th><th>Price</th><th>Modules</th><th>Actions</th></tr></thead>
+        <tbody id="courses-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────
+     IMAGE PICKER POPUP  (shared, one instance)
+     ───────────────────────────────────────────────────── -->
+<div class="img-pop" id="img-pop">
+  <div class="img-pop-box">
+    <div class="img-pop-title">Choose Image</div>
+    <div class="img-pop-tabs">
+      <button class="img-pop-tab active" id="tab-upload" onclick="switchImgTab('upload')">Upload from device</button>
+      <button class="img-pop-tab" id="tab-url" onclick="switchImgTab('url')">Use image URL</button>
+    </div>
+
+    <!-- UPLOAD TAB -->
+    <div id="img-tab-upload">
+      <div class="drop-zone" id="drop-zone"
+           onclick="document.getElementById('hidden-file').click()"
+           ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropFile(event)">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        <p>Drop your image here<br>or <b>click to browse files</b></p>
+        <small>JPG, PNG, GIF, WebP · Max 5 MB</small>
+      </div>
+      <input type="file" id="hidden-file" accept="image/*" style="display:none" onchange="fileSelected(event)"/>
+    </div>
+
+    <!-- URL TAB -->
+    <div id="img-tab-url" style="display:none">
+      <p style="font-size:13px;color:var(--tg);margin-bottom:12px">Paste any image URL — from Unsplash, your CDN, Google Drive (direct link), etc.</p>
+      <div class="url-row">
+        <input class="url-input" type="url" id="img-url-input" placeholder="https://images.unsplash.com/photo-..."/>
+        <button class="btn-use-url" onclick="useImgUrl()">Preview</button>
+      </div>
+    </div>
+
+    <!-- PREVIEW -->
+    <div class="pop-preview" id="pop-preview">
+      <div class="pop-preview-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Image ready
+      </div>
+      <img id="pop-preview-img" src="" alt="preview"/>
+    </div>
+
+    <div class="img-pop-foot">
+      <button class="btn-pop-cancel" onclick="cancelImgPicker()">Cancel</button>
+      <button class="btn-pop-confirm" id="btn-pop-confirm" onclick="confirmImgPicker()" disabled>Use This Image</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── CLASS MODAL ────────────────────────────────────── -->
+<div class="mo" id="class-modal">
+  <div class="mobox">
+    <h3 id="class-modal-title">Add Workout</h3>
+    <input type="hidden" id="class-id"/>
+
+    <!-- IMAGE PICKER -->
+    <div class="img-picker">
+      <span class="img-picker-label">Thumbnail Image</span>
+      <div class="img-picker-area" id="class-img-area" onclick="openImgPicker('class')">
+        <img class="img-picker-bg" id="class-img-bg" src="" style="display:none" alt=""/>
+        <div class="img-picker-overlay">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          <span>Change image</span>
+        </div>
+        <div class="img-picker-ph" id="class-img-ph">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          <span>Click to add image<br><b>upload or paste URL</b></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row"><label class="flabel">Workout Title</label><input class="finput" id="class-title" placeholder="e.g. 30 Min Easy Run Technique"/></div>
+    <div class="grid-row">
+      <div class="form-row"><label class="flabel">Duration</label><input class="finput" id="class-dur" placeholder="e.g. 30 MIN"/></div>
+      <div class="form-row"><label class="flabel">Level</label>
+        <select class="finput" id="class-level"><option>all levels</option><option>beginner</option><option>intermediate</option><option>advanced</option></select>
+      </div>
+    </div>
+    <div class="form-row"><label class="flabel">Description</label><textarea class="finput" id="class-desc" placeholder="Brief description of this workout"></textarea></div>
+    <div class="form-row">
+      <label class="flabel">Video URL <span style="font-weight:400;color:var(--tg)">(YouTube, Vimeo, or direct .mp4)</span></label>
+      <input class="finput" id="class-video" placeholder="https://www.youtube.com/watch?v=..."/>
+    </div>
+    <div class="toggle-row">
+      <label class="toggle"><input type="checkbox" id="class-free"/><span class="tslide"></span></label>
+      <span class="toggle-label">Free for all visitors (toggle off = members only)</span>
+    </div>
+    <div class="mo-foot">
+      <button class="btn-cancel-mo" onclick="closeModal('class-modal')">Cancel</button>
+      <button class="btn-save" onclick="saveClass()">Save Workout</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── SERIES MODAL ───────────────────────────────────── -->
+<div class="mo" id="series-modal">
+  <div class="mobox">
+    <h3 id="series-modal-title">Add Plan</h3>
+    <input type="hidden" id="series-id"/>
+
+    <div class="img-picker">
+      <span class="img-picker-label">Thumbnail Image</span>
+      <div class="img-picker-area" id="series-img-area" onclick="openImgPicker('series')">
+        <img class="img-picker-bg" id="series-img-bg" src="" style="display:none" alt=""/>
+        <div class="img-picker-overlay">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          <span>Change image</span>
+        </div>
+        <div class="img-picker-ph" id="series-img-ph">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          <span>Click to add image<br><b>upload or paste URL</b></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row"><label class="flabel">Plan Title</label><input class="finput" id="series-title" placeholder="e.g. Couch to 5K Plan"/></div>
+    <div class="form-row"><label class="flabel">Description</label><textarea class="finput" id="series-desc" placeholder="What this plan covers"></textarea></div>
+    <div class="form-row"><label class="flabel">Number of Sessions</label><input class="finput" id="series-count" type="number" min="1" placeholder="e.g. 8"/></div>
+    <div class="toggle-row">
+      <label class="toggle"><input type="checkbox" id="series-free"/><span class="tslide"></span></label>
+      <span class="toggle-label">Free for all visitors</span>
+    </div>
+    <div class="mo-foot">
+      <button class="btn-cancel-mo" onclick="closeModal('series-modal')">Cancel</button>
+      <button class="btn-save" onclick="saveSeries()">Save Plan</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── COURSE MODAL ───────────────────────────────────── -->
+<div class="mo" id="course-modal">
+  <div class="mobox">
+    <h3 id="course-modal-title">Add Course</h3>
+    <input type="hidden" id="course-id"/>
+
+    <div class="img-picker">
+      <span class="img-picker-label">Thumbnail Image</span>
+      <div class="img-picker-area" id="course-img-area" onclick="openImgPicker('course')">
+        <img class="img-picker-bg" id="course-img-bg" src="" style="display:none" alt=""/>
+        <div class="img-picker-overlay">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          <span>Change image</span>
+        </div>
+        <div class="img-picker-ph" id="course-img-ph">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          <span>Click to add image<br><b>upload or paste URL</b></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row"><label class="flabel">Course Title</label><input class="finput" id="course-title" placeholder="e.g. Complete 5K Blueprint"/></div>
+    <div class="form-row"><label class="flabel">Description</label><textarea class="finput" id="course-desc" placeholder="Full course description"></textarea></div>
+    <div class="grid-row">
+      <div class="form-row"><label class="flabel">Price ($)</label><input class="finput" id="course-price" type="number" min="0" placeholder="50"/></div>
+      <div class="form-row"><label class="flabel">Teacher Name</label><input class="finput" id="course-teacher" placeholder="Vineta"/></div>
+    </div>
+    <div class="form-row">
+      <label class="flabel" style="margin-bottom:10px">Course Modules &amp; Lessons</label>
+      <div id="modules-builder"></div>
+      <button class="btn-sm" onclick="addModule()">+ Add Module</button>
+    </div>
+    <div class="mo-foot">
+      <button class="btn-cancel-mo" onclick="closeModal('course-modal')">Cancel</button>
+      <button class="btn-save" onclick="saveCourse()">Save Course</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════
+//  AUTH
+// ════════════════════════════════════════════════
+const PASSPHRASE='run2025';
+function checkPass(){
+  const v=document.getElementById('pass-input').value;
+  if(v===PASSPHRASE){sessionStorage.setItem('rn_admin','1');startApp();}
+  else document.getElementById('gate-err').textContent='Incorrect passphrase.';
+}
+function logout(){sessionStorage.removeItem('rn_admin');location.reload();}
+window.addEventListener('load',()=>{if(sessionStorage.getItem('rn_admin'))startApp();});
+function startApp(){
+  document.getElementById('gate').style.display='none';
+  document.getElementById('app').classList.add('on');
+  renderAll();
+}
+
+// ════════════════════════════════════════════════
+//  DATA
+// ════════════════════════════════════════════════
+const DC=[
+  {id:1,title:"20 Min Easy Run Technique",duration:"20 MIN",level:"beginner",desc:"The foundation of every great runner.",isFree:true,thumbnail:"https://images.unsplash.com/photo-1571731956672-f2b94d7dd0cb?w=300&q=80",videoUrl:""},
+  {id:2,title:"25 Min Running Form Fundamentals",duration:"25 MIN",level:"beginner",desc:"Form before fitness.",isFree:true,thumbnail:"https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=300&q=80",videoUrl:""},
+  {id:3,title:"30 Min Interval Training Intro",duration:"30 MIN",level:"beginner",desc:"Your first taste of structured speedwork.",isFree:false,thumbnail:"https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=300&q=80",videoUrl:""},
+  {id:4,title:"35 Min Cadence & Stride Drills",duration:"35 MIN",level:"intermediate",desc:"Step rate training.",isFree:false,thumbnail:"https://images.unsplash.com/photo-1483721310020-03333e577078?w=300&q=80",videoUrl:""},
+  {id:5,title:"40 Min Hill Training Session",duration:"40 MIN",level:"intermediate",desc:"Hills build power.",isFree:false,thumbnail:"https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=300&q=80",videoUrl:""},
+  {id:6,title:"45 Min Tempo Run Fundamentals",duration:"45 MIN",level:"intermediate",desc:"Lactate threshold training.",isFree:false,thumbnail:"https://images.unsplash.com/photo-1529634806980-59cd74b52313?w=300&q=80",videoUrl:""}
+];
+const DS=[
+  {id:1,title:"Couch to 5K: 8-Week Plan",desc:"Zero to 5K.",isFree:false,count:8,thumbnail:"https://images.unsplash.com/photo-1517649763962-0c623066013b?w=300&q=80"},
+  {id:2,title:"5K to 10K Progression Plan",desc:"Double your distance.",isFree:false,count:10,thumbnail:"https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=300&q=80"},
+  {id:3,title:"Running Form Masterclass",desc:"Form from the ground up.",isFree:false,count:6,thumbnail:"https://images.unsplash.com/photo-1581889470536-467cc68e5f6b?w=300&q=80"},
+  {id:4,title:"Injury-Free Running System",desc:"Train smarter.",isFree:false,count:7,thumbnail:"https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=300&q=80"},
+  {id:5,title:"First Half Marathon Blueprint",desc:"21K preparation.",isFree:false,count:14,thumbnail:"https://images.unsplash.com/photo-1487466365202-1afdb86c764e?w=300&q=80"},
+  {id:6,title:"Speed & Interval Training",desc:"Get faster.",isFree:false,count:9,thumbnail:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=80"}
+];
+const DCOURSES=[
+  {id:1,title:"Complete 5K Blueprint",teacher:"Vineta",price:45,thumbnail:"https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=300&q=80",desc:"Complete beginner program.",modules:[{id:1,title:"MODULE 1 — FOUNDATIONS",lessons:[{id:1,title:"Your First Easy Run",duration:"20 mins"},{id:2,title:"Running Form Basics",duration:"25 mins"}]}]},
+  {id:2,title:"Running Form & Efficiency Course",teacher:"Vineta",price:55,thumbnail:"https://images.unsplash.com/photo-1483721310020-03333e577078?w=300&q=80",desc:"Form masterclass.",modules:[{id:1,title:"MODULE 1 — POSTURE",lessons:[{id:1,title:"Posture Stack",duration:"22 mins"},{id:2,title:"Hip Drive",duration:"28 mins"}]}]},
+  {id:3,title:"Half Marathon Accelerator",teacher:"Vineta",price:70,thumbnail:"https://images.unsplash.com/photo-1487466365202-1afdb86c764e?w=300&q=80",desc:"Half marathon prep.",modules:[{id:1,title:"MODULE 1 — LONG RUN",lessons:[{id:1,title:"Building Your Long Run",duration:"45 mins"},{id:2,title:"Aerobic Threshold",duration:"40 mins"}]}]}
+];
+function getData(key,def){const s=localStorage.getItem(key);if(!s){localStorage.setItem(key,JSON.stringify(def));return def;}return JSON.parse(s);}
+function setData(key,val){localStorage.setItem(key,JSON.stringify(val));}
+
+// ════════════════════════════════════════════════
+//  TABS
+// ════════════════════════════════════════════════
+function switchTab(t){
+  ['classes','series','courses'].forEach(n=>{
+    document.getElementById('tab-'+n).classList.toggle('active',n===t);
+    document.getElementById('pane-'+n).style.display=n===t?'block':'none';
+  });
+}
+
+// ════════════════════════════════════════════════
+//  RENDER TABLES
+// ════════════════════════════════════════════════
+function renderAll(){renderClasses();renderSeries();renderCourses();}
+
+function renderClasses(){
+  const data=getData('rn_classes',DC);
+  const tb=document.getElementById('classes-tbody');
+  if(!data.length){tb.innerHTML=`<tr><td colspan="7"><div class="empty-row">No workouts yet.</div></td></tr>`;return;}
+  tb.innerHTML=data.map(c=>`<tr>
+    <td><img class="thumb-sm" src="${c.thumbnail||''}" onerror="this.style.opacity='.3'" alt=""/></td>
+    <td><b>${c.title}</b></td>
+    <td>${c.duration||'—'}</td>
+    <td>${c.level||'all levels'}</td>
+    <td><span class="${c.isFree?'badge-free':'badge-paid'}">${c.isFree?'FREE':'Members Only'}</span></td>
+    <td style="font-size:12px;color:var(--tg)">${c.videoUrl?`<a href="${c.videoUrl}" target="_blank" style="color:var(--pm)">Link ↗</a>`:'—'}</td>
+    <td><div class="tbl-actions"><button class="btn-edit" onclick="editClass(${c.id})">Edit</button><button class="btn-del" onclick="deleteClass(${c.id})">Delete</button></div></td>
+  </tr>`).join('');
+}
+
+function renderSeries(){
+  const data=getData('rn_series',DS);
+  const tb=document.getElementById('series-tbody');
+  if(!data.length){tb.innerHTML=`<tr><td colspan="5"><div class="empty-row">No plans yet.</div></td></tr>`;return;}
+  tb.innerHTML=data.map(s=>`<tr>
+    <td><img class="thumb-sm" src="${s.thumbnail||''}" onerror="this.style.opacity='.3'" alt=""/></td>
+    <td><b>${s.title}</b></td>
+    <td>${s.count||0} sessions</td>
+    <td><span class="${s.isFree?'badge-free':'badge-paid'}">${s.isFree?'FREE':'Members Only'}</span></td>
+    <td><div class="tbl-actions"><button class="btn-edit" onclick="editSeries(${s.id})">Edit</button><button class="btn-del" onclick="deleteSeries(${s.id})">Delete</button></div></td>
+  </tr>`).join('');
+}
+
+function renderCourses(){
+  const data=getData('rn_courses',DCOURSES);
+  const tb=document.getElementById('courses-tbody');
+  if(!data.length){tb.innerHTML=`<tr><td colspan="5"><div class="empty-row">No courses yet.</div></td></tr>`;return;}
+  tb.innerHTML=data.map(c=>`<tr>
+    <td><img class="thumb-sm" src="${c.thumbnail||''}" onerror="this.style.opacity='.3'" alt=""/></td>
+    <td><b>${c.title}</b></td>
+    <td>$${c.price}</td>
+    <td>${(c.modules||[]).length} module(s)</td>
+    <td><div class="tbl-actions"><button class="btn-edit" onclick="editCourse(${c.id})">Edit</button><button class="btn-del" onclick="deleteCourse(${c.id})">Delete</button></div></td>
+  </tr>`).join('');
+}
+
+// ════════════════════════════════════════════════
+//  IMAGE PICKER  (shared global popup)
+// ════════════════════════════════════════════════
+let imgTarget=null;  // 'class' | 'series' | 'course'
+let pendingImg=null; // data URL or URL string
+
+function openImgPicker(target){
+  imgTarget=target;pendingImg=null;
+  document.getElementById('img-url-input').value='';
+  document.getElementById('hidden-file').value='';
+  document.getElementById('pop-preview').style.display='none';
+  document.getElementById('pop-preview-img').src='';
+  document.getElementById('btn-pop-confirm').disabled=true;
+  switchImgTab('upload');
+  document.getElementById('img-pop').classList.add('on');
+}
+function cancelImgPicker(){document.getElementById('img-pop').classList.remove('on');}
+
+function confirmImgPicker(){
+  if(!pendingImg)return;
+  setPickerImage(imgTarget,pendingImg);
+  cancelImgPicker();
+}
+
+function setPickerImage(target,src){
+  const bg=document.getElementById(target+'-img-bg');
+  const ph=document.getElementById(target+'-img-ph');
+  const area=document.getElementById(target+'-img-area');
+  bg.src=src;bg.style.display='block';
+  ph.style.display='none';
+  area.classList.add('has-img');
+  window['imgData_'+target]=src;
+}
+
+function clearPickerImage(target){
+  const bg=document.getElementById(target+'-img-bg');
+  const ph=document.getElementById(target+'-img-ph');
+  const area=document.getElementById(target+'-img-area');
+  bg.src='';bg.style.display='none';
+  ph.style.display='flex';
+  area.classList.remove('has-img');
+  window['imgData_'+target]=null;
+}
+
+function switchImgTab(tab){
+  document.getElementById('img-tab-upload').style.display=tab==='upload'?'block':'none';
+  document.getElementById('img-tab-url').style.display=tab==='url'?'block':'none';
+  document.getElementById('tab-upload').classList.toggle('active',tab==='upload');
+  document.getElementById('tab-url').classList.toggle('active',tab==='url');
+}
+
+function showPickerPreview(src){
+  const img=document.getElementById('pop-preview-img');
+  img.src=src;
+  img.onerror=()=>{
+    document.getElementById('pop-preview').style.display='none';
+    pendingImg=null;
+    document.getElementById('btn-pop-confirm').disabled=true;
+    alert('Could not load that image URL. Check it is a direct image link (ends with .jpg, .png, etc.).');
+  };
+  img.onload=()=>{
+    document.getElementById('pop-preview').style.display='block';
+    pendingImg=src;
+    document.getElementById('btn-pop-confirm').disabled=false;
+  };
+}
+
+function fileSelected(e){
+  const file=e.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{showPickerPreview(ev.target.result);};
+  reader.readAsDataURL(file);
+}
+
+function dragOver(e){e.preventDefault();document.getElementById('drop-zone').classList.add('drag-over');}
+function dragLeave(){document.getElementById('drop-zone').classList.remove('drag-over');}
+function dropFile(e){
+  e.preventDefault();
+  document.getElementById('drop-zone').classList.remove('drag-over');
+  const file=e.dataTransfer.files[0];
+  if(!file||!file.type.startsWith('image/'))return;
+  const reader=new FileReader();
+  reader.onload=ev=>{showPickerPreview(ev.target.result);};
+  reader.readAsDataURL(file);
+}
+
+function useImgUrl(){
+  const url=document.getElementById('img-url-input').value.trim();
+  if(!url)return;
+  showPickerPreview(url);
+}
+
+document.getElementById('img-pop').addEventListener('click',function(e){if(e.target===this)cancelImgPicker();});
+
+// ════════════════════════════════════════════════
+//  CLASSES CRUD
+// ════════════════════════════════════════════════
+function openAddClass(){
+  document.getElementById('class-modal-title').textContent='Add Workout';
+  document.getElementById('class-id').value='';
+  ['class-title','class-dur','class-desc','class-video'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('class-level').value='all levels';
+  document.getElementById('class-free').checked=false;
+  clearPickerImage('class');
+  openModal('class-modal');
+}
+function editClass(id){
+  const c=getData('rn_classes',DC).find(x=>x.id===id);if(!c)return;
+  document.getElementById('class-modal-title').textContent='Edit Workout';
+  document.getElementById('class-id').value=id;
+  document.getElementById('class-title').value=c.title||'';
+  document.getElementById('class-dur').value=c.duration||'';
+  document.getElementById('class-level').value=c.level||'all levels';
+  document.getElementById('class-desc').value=c.desc||'';
+  document.getElementById('class-video').value=c.videoUrl||'';
+  document.getElementById('class-free').checked=!!c.isFree;
+  if(c.thumbnail)setPickerImage('class',c.thumbnail);else clearPickerImage('class');
+  openModal('class-modal');
+}
+function saveClass(){
+  const id=document.getElementById('class-id').value;
+  const data=getData('rn_classes',DC);
+  const obj={
+    id:id?parseInt(id):Date.now(),
+    title:document.getElementById('class-title').value.trim(),
+    duration:document.getElementById('class-dur').value.trim().toUpperCase(),
+    level:document.getElementById('class-level').value,
+    desc:document.getElementById('class-desc').value.trim(),
+    videoUrl:document.getElementById('class-video').value.trim(),
+    thumbnail:window.imgData_class||'',
+    isFree:document.getElementById('class-free').checked
+  };
+  if(!obj.title){alert('Please enter a title.');return;}
+  if(id){const i=data.findIndex(x=>x.id===parseInt(id));if(i>-1)data[i]=obj;else data.push(obj);}
+  else data.push(obj);
+  setData('rn_classes',data);closeModal('class-modal');renderClasses();
+}
+function deleteClass(id){
+  if(!confirm('Delete this workout?'))return;
+  setData('rn_classes',getData('rn_classes',DC).filter(x=>x.id!==id));renderClasses();
+}
+
+// ════════════════════════════════════════════════
+//  SERIES CRUD
+// ════════════════════════════════════════════════
+function openAddSeries(){
+  document.getElementById('series-modal-title').textContent='Add Plan';
+  document.getElementById('series-id').value='';
+  ['series-title','series-desc','series-count'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('series-free').checked=false;
+  clearPickerImage('series');
+  openModal('series-modal');
+}
+function editSeries(id){
+  const s=getData('rn_series',DS).find(x=>x.id===id);if(!s)return;
+  document.getElementById('series-modal-title').textContent='Edit Plan';
+  document.getElementById('series-id').value=id;
+  document.getElementById('series-title').value=s.title||'';
+  document.getElementById('series-desc').value=s.desc||'';
+  document.getElementById('series-count').value=s.count||'';
+  document.getElementById('series-free').checked=!!s.isFree;
+  if(s.thumbnail)setPickerImage('series',s.thumbnail);else clearPickerImage('series');
+  openModal('series-modal');
+}
+function saveSeries(){
+  const id=document.getElementById('series-id').value;
+  const data=getData('rn_series',DS);
+  const obj={
+    id:id?parseInt(id):Date.now(),
+    title:document.getElementById('series-title').value.trim(),
+    desc:document.getElementById('series-desc').value.trim(),
+    count:parseInt(document.getElementById('series-count').value)||0,
+    thumbnail:window.imgData_series||'',
+    isFree:document.getElementById('series-free').checked
+  };
+  if(!obj.title){alert('Please enter a title.');return;}
+  if(id){const i=data.findIndex(x=>x.id===parseInt(id));if(i>-1)data[i]=obj;else data.push(obj);}
+  else data.push(obj);
+  setData('rn_series',data);closeModal('series-modal');renderSeries();
+}
+function deleteSeries(id){
+  if(!confirm('Delete this plan?'))return;
+  setData('rn_series',getData('rn_series',DS).filter(x=>x.id!==id));renderSeries();
+}
+
+// ════════════════════════════════════════════════
+//  COURSES CRUD
+// ════════════════════════════════════════════════
+let modCounter=0;
+function openAddCourse(){
+  document.getElementById('course-modal-title').textContent='Add Course';
+  document.getElementById('course-id').value='';
+  ['course-title','course-desc','course-price'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('course-teacher').value='Vineta';
+  clearPickerImage('course');
+  document.getElementById('modules-builder').innerHTML='';modCounter=0;addModule();
+  openModal('course-modal');
+}
+function editCourse(id){
+  const c=getData('rn_courses',DCOURSES).find(x=>x.id===id);if(!c)return;
+  document.getElementById('course-modal-title').textContent='Edit Course';
+  document.getElementById('course-id').value=id;
+  document.getElementById('course-title').value=c.title||'';
+  document.getElementById('course-desc').value=c.desc||'';
+  document.getElementById('course-price').value=c.price||'';
+  document.getElementById('course-teacher').value=c.teacher||'Vineta';
+  if(c.thumbnail)setPickerImage('course',c.thumbnail);else clearPickerImage('course');
+  const mb=document.getElementById('modules-builder');mb.innerHTML='';modCounter=0;
+  (c.modules||[]).forEach(m=>addModule(m.title,m.lessons||[]));
+  openModal('course-modal');
+}
+function addModule(title='',lessons=[]){
+  const mid=++modCounter;
+  const mb=document.getElementById('modules-builder');
+  const div=document.createElement('div');div.className='mod-block';div.id='mod-'+mid;
+  div.innerHTML=`
+    <div class="mod-head-row">
+      <input class="mod-title-in" placeholder="e.g. MODULE 1 — FOUNDATIONS" value="${title}"/>
+      <button class="btn-sm" onclick="addLesson(${mid})">+ Lesson</button>
+      <button class="btn-rm" onclick="document.getElementById('mod-${mid}').remove()" title="Remove module">×</button>
+    </div>
+    <div id="lessons-${mid}"></div>`;
+  mb.appendChild(div);
+  lessons.forEach(l=>addLesson(mid,l.title,l.duration));
+}
+function addLesson(mid,title='',dur=''){
+  const lc=document.getElementById('lessons-'+mid);
+  const row=document.createElement('div');row.className='lesson-row';
+  row.innerHTML=`<input class="lesson-in" placeholder="Lesson title" value="${title}"/><input class="lesson-dur" placeholder="Duration" value="${dur}"/><button class="btn-rm" onclick="this.parentNode.remove()">×</button>`;
+  lc.appendChild(row);
+}
+function readModules(){
+  return Array.from(document.querySelectorAll('.mod-block')).map((mb,mi)=>({
+    id:mi+1,
+    title:mb.querySelector('.mod-title-in').value.trim()||'Module '+(mi+1),
+    lessons:Array.from(mb.querySelectorAll('.lesson-row')).reduce((acc,lr,li)=>{
+      const t=lr.querySelector('.lesson-in').value.trim();
+      const d=lr.querySelector('.lesson-dur').value.trim();
+      if(t)acc.push({id:li+1,title:t,duration:d,thumbnail:'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=120&q=80'});
+      return acc;
+    },[])
+  })).filter(m=>m.title||m.lessons.length);
+}
+function saveCourse(){
+  const id=document.getElementById('course-id').value;
+  const data=getData('rn_courses',DCOURSES);
+  const obj={
+    id:id?parseInt(id):Date.now(),
+    title:document.getElementById('course-title').value.trim(),
+    desc:document.getElementById('course-desc').value.trim(),
+    price:parseFloat(document.getElementById('course-price').value)||0,
+    teacher:document.getElementById('course-teacher').value.trim()||'Vineta',
+    thumbnail:window.imgData_course||'',
+    modules:readModules()
+  };
+  if(!obj.title){alert('Please enter a title.');return;}
+  if(id){const i=data.findIndex(x=>x.id===parseInt(id));if(i>-1)data[i]=obj;else data.push(obj);}
+  else data.push(obj);
+  setData('rn_courses',data);closeModal('course-modal');renderCourses();
+}
+function deleteCourse(id){
+  if(!confirm('Delete this course?'))return;
+  setData('rn_courses',getData('rn_courses',DCOURSES).filter(x=>x.id!==id));renderCourses();
+}
+
+// ════════════════════════════════════════════════
+//  MODAL HELPERS
+// ════════════════════════════════════════════════
+function openModal(id){document.getElementById(id).classList.add('on');}
+function closeModal(id){document.getElementById(id).classList.remove('on');}
+document.querySelectorAll('.mo').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('on');}));
+</script>
+<footer style="background:#15803d;color:#fff;padding:28px 32px;text-align:center">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="font-size:14px;font-weight:700;margin-bottom:6px">Powered by Run Smart</div>
+    <div style="font-size:12px;opacity:.7;margin-bottom:14px">© 2026 RUN SMART · All rights reserved.</div>
+    <div style="display:flex;gap:28px;justify-content:center;font-size:14px">
+      <a href="mailto:info@runsmart.co" style="color:#86efac;text-decoration:none">Support</a>
+      <a href="terms.html" style="color:#86efac;text-decoration:none">Terms</a>
+      <a href="privacy.html" style="color:#86efac;text-decoration:none">Privacy</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
