@@ -116,7 +116,7 @@
 
 <script>
 const FULL_COURSES=[
-  {id:1,title:"Complete 5K Blueprint",teacher:"Vineta",price:45,
+  {id:1,title:"Complete 5K Blueprint",teacher:"Vineta",price:22,
    thumbnail:"https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&q=80",
    desc:"The most complete beginner running program available. Three structured modules covering the exact training progressions, form cues, and pacing strategies that take a complete non-runner to a confident 5K finisher. Each session is designed for any environment — track, road, treadmill, or park — and requires no equipment beyond running shoes.",
    modules:[
@@ -131,7 +131,7 @@ const FULL_COURSES=[
        {id:6,title:"5K Race Day Simulation",duration:"40 mins",thumbnail:"https://images.unsplash.com/photo-1529634806980-59cd74b52313?w=120&q=80"}
      ]}
   ]},
-  {id:2,title:"Running Form & Efficiency Course",teacher:"Vineta",price:55,
+  {id:2,title:"Running Form & Efficiency Course",teacher:"Vineta",price:27,
    thumbnail:"https://images.unsplash.com/photo-1483721310020-03333e577078?w=600&q=80",
    desc:"The technical masterclass for runners who want to stop leaving speed and efficiency on the table. Four modules covering every mechanical element of elite running form — how to move efficiently, breathe correctly, land properly, and drive powerfully through each stride.",
    modules:[
@@ -145,7 +145,7 @@ const FULL_COURSES=[
        {id:5,title:"Integration Run",duration:"35 mins",thumbnail:"https://images.unsplash.com/photo-1529634806980-59cd74b52313?w=120&q=80"}
      ]}
   ]},
-  {id:3,title:"Half Marathon Accelerator",teacher:"Vineta",price:70,
+  {id:3,title:"Half Marathon Accelerator",teacher:"Vineta",price:35,
    thumbnail:"https://images.unsplash.com/photo-1487466365202-1afdb86c764e?w=600&q=80",
    desc:"The complete half marathon preparation system. Five modules covering long run progression, race-pace development, fuelling strategy, taper protocol, and race-day execution — everything you need to cross the 21K finish line feeling strong and celebrating.",
    modules:[
@@ -181,7 +181,7 @@ function render(){
     <div class="course-teacher">By ${course.teacher}</div>
     <div class="course-img"><img src="${course.thumbnail}" alt="${course.title}" loading="lazy"/></div>
     <p class="course-desc">${course.desc}</p>
-    <button class="btn-buy" onclick="buyNow()">Buy Now ($${course.price})</button>
+    <button class="btn-buy" onclick="buyNow()">Buy Now (€${course.price})</button>
     <p class="buy-hint">Instant access · No subscription required</p>`;
 
   const modulesHtml=course.modules.map(m=>`

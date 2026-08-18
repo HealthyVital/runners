@@ -111,11 +111,11 @@
       <div class="plan-label">Choose Your Plan:</div>
       <div class="plan-card sel" id="plan-annual" onclick="selectPlan('annual')">
         <div class="plan-name">Annual</div>
-        <div class="plan-right"><div class="plan-price">$180 / year</div><div class="plan-trial">7-day free trial</div></div>
+        <div class="plan-right"><div class="plan-price">€120 / year</div><div class="plan-trial">7-day free trial</div></div>
       </div>
       <div class="plan-card" id="plan-monthly" onclick="selectPlan('monthly')">
         <div class="plan-name">Monthly</div>
-        <div class="plan-right"><div class="plan-price">$19 / month</div><div class="plan-trial">7-day free trial</div></div>
+        <div class="plan-right"><div class="plan-price">€15 / month</div><div class="plan-trial">7-day free trial</div></div>
       </div>
       <button class="btn-trial" onclick="startTrial()">Get Access Now</button>
       <div class="motiny">Cancel anytime. Immediate full access.</div>
@@ -125,9 +125,9 @@
 
 <script>
 const COURSES=[
-  {id:1,title:"Complete 5K Blueprint",teacher:"Vineta",price:45,thumbnail:"https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&q=80",desc:"The most complete beginner running program available. Three structured modules covering the exact training progressions, form cues, and pacing strategies that take a complete non-runner to a confident 5K finisher. No guesswork, no suffering — just a proven system that works on the first try."},
-  {id:2,title:"Running Form & Efficiency Course",teacher:"Vineta",price:55,thumbnail:"https://images.unsplash.com/photo-1483721310020-03333e577078?w=400&q=80",desc:"The technical masterclass for runners who want to stop leaving speed and efficiency on the table. Four modules covering every mechanical element of elite running form — how to move efficiently, breathe correctly, land properly, and drive powerfully through each stride. The course that turns okay runners into efficient ones."},
-  {id:3,title:"Half Marathon Accelerator",teacher:"Vineta",price:70,thumbnail:"https://images.unsplash.com/photo-1487466365202-1afdb86c764e?w=400&q=80",desc:"The complete half marathon preparation system. Five modules covering long run progression, race-pace development, fuelling strategy, taper protocol, and race-day execution — everything you need to cross the 21K finish line feeling strong and celebrating, not crawling and suffering."}
+  {id:1,title:"Complete 5K Blueprint",teacher:"Vineta",price:22,thumbnail:"https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&q=80",desc:"The most complete beginner running program available. Three structured modules covering the exact training progressions, form cues, and pacing strategies that take a complete non-runner to a confident 5K finisher. No guesswork, no suffering — just a proven system that works on the first try."},
+  {id:2,title:"Running Form & Efficiency Course",teacher:"Vineta",price:27,thumbnail:"https://images.unsplash.com/photo-1483721310020-03333e577078?w=400&q=80",desc:"The technical masterclass for runners who want to stop leaving speed and efficiency on the table. Four modules covering every mechanical element of elite running form — how to move efficiently, breathe correctly, land properly, and drive powerfully through each stride. The course that turns okay runners into efficient ones."},
+  {id:3,title:"Half Marathon Accelerator",teacher:"Vineta",price:35,thumbnail:"https://images.unsplash.com/photo-1487466365202-1afdb86c764e?w=400&q=80",desc:"The complete half marathon preparation system. Five modules covering long run progression, race-pace development, fuelling strategy, taper protocol, and race-day execution — everything you need to cross the 21K finish line feeling strong and celebrating, not crawling and suffering."}
 ];
 
 function getUser(){try{return JSON.parse(localStorage.getItem('rn_user'));}catch(e){return null;}}
@@ -141,14 +141,14 @@ function renderCourses(){
     <div class="ccard" onclick="openCourse(${c.id})">
       <div class="cthumb">
         <img src="${c.thumbnail}" loading="lazy" alt="${c.title}"/>
-        <div class="cprice-badge">$${c.price}</div>
+        <div class="cprice-badge">€${c.price}</div>
       </div>
       <div class="cbody">
         <div class="cteacher">${c.teacher}</div>
         <div class="ctitle">${c.title}</div>
         <div class="cdesc">${c.desc}</div>
         <div class="cfoot">
-          <div class="cprice">$${c.price}</div>
+          <div class="cprice">€${c.price}</div>
           <button class="btn-view">View Course</button>
         </div>
       </div>
